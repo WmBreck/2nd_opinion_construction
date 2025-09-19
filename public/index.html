@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2nd Opinion Construction</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="hero">
+    <div class="container hero__content">
+      <div class="hero__text">
+        <span class="hero__tagline">Considering a Remodel or Addition in Upstate SC?</span>
+        <h1>Measure twice. Build once.</h1>
+        <p class="hero__description">Get a confidential second opinion on your contractor bid before you sign. Straight talk from local builders who understand Upstate budgets, subs, and permitting.</p>
+        <div class="hero__actions">
+          <button id="cta-button" class="button button--primary">Upload your bid for a confidential review</button>
+          <a href="tel:18646609913" class="button button--ghost">Call (864) 660-9913</a>
+        </div>
+        <p class="hero__privacy">Your info is never shared with third parties.</p>
+      </div>
+      <div class="hero__card">
+        <h2>What you get</h2>
+        <ul>
+          <li>Line-by-line review of your bid</li>
+          <li>Realistic allowances and timelines</li>
+          <li>Upfront advice on scope and change orders</li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section section--two-column">
+      <div class="container">
+        <div class="feature">
+          <h3>Local expertise, zero pressure</h3>
+          <p>We’re builders in the Upstate. Use us as a gut check before you commit, or when you need a neutral third party to sanity-check pricing and scope.</p>
+        </div>
+        <div class="feature">
+          <h3>Secure document handling</h3>
+          <p>Your drawings, specs, and bids stay private. We use Supabase with private storage, expiring links, and verification before anyone at our firm opens your files.</p>
+        </div>
+        <div class="feature">
+          <h3>Quick turnaround</h3>
+          <p>Expect an email or phone call within one business day. If we need more detail, we’ll reach out directly.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>A service of Upstate Contractors LLC — Greenville, SC • <a href="mailto:upcountrycontractors@gmail.com">upcountrycontractors@gmail.com</a></p>
+    </div>
+  </footer>
+
+  <div id="intake-modal" class="modal" role="dialog" aria-hidden="true" aria-labelledby="modal-title">
+    <div class="modal__overlay" data-close></div>
+    <div class="modal__content">
+      <button class="modal__close" data-close aria-label="Close intake form">×</button>
+
+      <div class="modal__step" data-step="contact">
+        <h2 id="modal-title">Tell us about your project</h2>
+        <p class="modal__intro">We’ll send a one-time code to verify you before collecting files.</p>
+        <form id="contact-form" novalidate>
+          <div class="form-grid">
+            <label>
+              Name
+              <input type="text" name="name" required autocomplete="name">
+              <span class="field-error" data-error-for="name"></span>
+            </label>
+            <label>
+              Email
+              <input type="email" name="email" required autocomplete="email">
+              <span class="field-error" data-error-for="email"></span>
+            </label>
+            <label>
+              Phone
+              <input type="tel" name="phone" required autocomplete="tel">
+              <span class="field-error" data-error-for="phone"></span>
+            </label>
+            <label>
+              City
+              <input type="text" name="city" autocomplete="address-level2">
+            </label>
+            <label>
+              ZIP
+              <input type="text" name="zip" autocomplete="postal-code">
+            </label>
+            <label>
+              Project type (optional)
+              <select name="project_type">
+                <option value="">Select</option>
+                <option value="kitchen">Kitchen</option>
+                <option value="bath">Bath</option>
+                <option value="addition">Addition</option>
+                <option value="exterior">Exterior</option>
+                <option value="whole-home">Whole-home</option>
+                <option value="other">Other</option>
+              </select>
+            </label>
+            <label>
+              Budget range (optional)
+              <select name="budget_range">
+                <option value="">Select</option>
+                <option value="<15k">&lt;15k</option>
+                <option value="15–50k">15–50k</option>
+                <option value="50–150k">50–150k</option>
+                <option value="150k+">150k+</option>
+              </select>
+            </label>
+            <label>
+              What's prompting the review?
+              <select name="reason" required>
+                <option value="">Select</option>
+                <option value="Price feels high">Price feels high</option>
+                <option value="Scope unclear">Scope unclear</option>
+                <option value="Timeline concern">Timeline concern</option>
+                <option value="Other">Other</option>
+              </select>
+              <span class="field-error" data-error-for="reason"></span>
+            </label>
+            <label class="full-width">
+              Extra context (optional)
+              <textarea name="notes" rows="3" placeholder="Share anything you'd like us to know before we review."></textarea>
+            </label>
+          </div>
+          <label class="consent">
+            <input type="checkbox" name="consent" required>
+            <span>I agree to a confidential review and to be contacted by phone or email.</span>
+          </label>
+          <span class="field-error" data-error-for="consent"></span>
+          <button type="submit" class="button button--primary" data-submit>Send me a verification code</button>
+          <p class="form-status" data-status></p>
+        </form>
+      </div>
+
+      <div class="modal__step" data-step="otp" hidden>
+        <h2>Check your email</h2>
+        <p>We’ve sent a 6-digit code to <strong data-otp-email></strong>. Enter it below to continue.</p>
+        <form id="otp-form" novalidate>
+          <label class="otp">
+            Verification code
+            <input type="text" inputmode="numeric" name="otp" required maxlength="6" pattern="[0-9]{6}">
+            <span class="field-error" data-error-for="otp"></span>
+          </label>
+          <div class="otp__actions">
+            <button type="submit" class="button button--primary" data-submit>Verify</button>
+            <button type="button" class="button button--ghost" id="resend-otp">Resend code</button>
+          </div>
+          <p class="form-status" data-status></p>
+        </form>
+      </div>
+
+      <div class="modal__step" data-step="upload" hidden>
+        <h2>Upload your bid</h2>
+        <p>Attach up to five files. We accept PDF, DOC, DOCX, JPG, and PNG up to 50&nbsp;MB each.</p>
+        <form id="upload-form" novalidate>
+          <label class="file-drop" id="file-drop">
+            <input type="file" id="file-input" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" hidden>
+            <span>Drag files here or <button type="button" class="link" id="file-select">browse your computer</button></span>
+          </label>
+          <ul class="upload-list" id="upload-list"></ul>
+          <p class="form-status" data-status></p>
+          <div class="upload__actions">
+            <button type="submit" class="button button--primary" data-submit>Upload and submit</button>
+            <button type="button" class="button button--ghost" data-close>Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal__step" data-step="success" hidden>
+        <h2>Thanks — we’re on it.</h2>
+        <p>We’ll review within one business day. If we need plans or details, we’ll reach out directly.</p>
+        <button class="button button--primary" data-close>Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="env.js"></script>
+  <script src="app.js" defer></script>
+</body>
+</html>
