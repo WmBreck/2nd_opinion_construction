@@ -376,34 +376,26 @@ header.hero .hero-brand__img{ height: var(--soc-logo-h-desktop); }
   header.hero .hero-brand__img{ height: var(--soc-logo-h-mobile); }
 }
 
-/* Lead tagline: smaller, top-aligned with logo */
+/* === SOC: single source of truth for lead tagline ===================== */
 header.hero .hero__tagline.hero__tagline--lead{
   --soc-logo-h: var(--soc-logo-h-desktop);
   color: var(--brand-primary);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: .01em;
-  line-height: 1;                          /* tight box */
-  font-size: clamp(1.55rem, calc(var(--soc-logo-h) / 1.8), 5rem); /* smaller */
+  line-height: 1;                                 /* tight box */
+  font-size: clamp(1.55rem, calc(var(--soc-logo-h) / 2.1), 2.8rem);
   text-wrap: balance;
-  max-inline-size: 46ch;                   /* encourages 2-line wrap */
-  align-self: start;                       /* top-align to logo */
-  margin-top: -0.0 rem;                    /* nudge up to match hat */
+  max-inline-size: 46ch;                          /* keeps it to ~2 lines */
+  align-self: start;                              /* top-align to logo */
+  margin-top: 0;                                  /* valid value (no stray space) */
 }
 
+/* Mobile sizing (only one block) */
 @media (max-width:640px){
   header.hero .hero__tagline.hero__tagline--lead{
     --soc-logo-h: var(--soc-logo-h-mobile);
-    font-size: clamp(1.2rem, calc(var(--soc-logo-h) / 2.0), 4rem);
-    margin-top: -0.12rem;
-  }
-}
-
-/* Mobile sizing */
-@media (max-width:640px){
-  header.hero .hero__tagline.hero__tagline--lead{
-    --soc-logo-h: var(--soc-logo-h-mobile);
-   font-size: clamp(1.2rem, calc(var(--soc-logo-h) / 1.8), 2.4rem);
+    font-size: clamp(1.2rem, calc(var(--soc-logo-h) / 2.2), 2.2rem);
     line-height: 1;
     margin-top: 0;
   }
