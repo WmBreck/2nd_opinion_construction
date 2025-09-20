@@ -90,13 +90,12 @@ body.page{
   box-shadow: var(--shadow-lg);
   background:#000;
 }
-.photo-band img{
+.photo-band img {
   width:100%;
   height:420px;
   object-fit:cover;
-  object-position:center;
+  object-position:center bottom; /* bias crop to show tape measure numbers */
   display:block;
-  filter:saturate(.98) contrast(1.02);
 }
 
 /* =========
