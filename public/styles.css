@@ -314,8 +314,12 @@ header.hero .container.hero__content > *{
   margin-right: auto;
 }
 
-/* Keep intro row tight on mobile */
+/* Keep/* Keep intro row tight on mobile */
 header.hero .hero-intro{
+  display: grid;
+  grid-template-columns: auto 1fr; /* logo | tagline */
+  align-items: start;              /* top-align both */
+  column-gap: 1rem;
   gap: .75rem;
 }
 
@@ -360,39 +364,8 @@ header.hero .hero-banner{ margin: 0 0 1.25rem 0; }
 @media (max-width: 640px){
   header.hero .hero__actions{ flex-direction: column; align-items: stretch; }
 }
-/* Tagline: larger, blue, bold, aligned with logo */
-header.hero .hero-intro{ align-items: center; }
-header.hero .hero__tagline.hero__tagline--lead{
-  color: var(--brand-primary);
-  font-weight: 800;
-  letter-spacing: .02em;
-  text-transform: uppercase;
-  line-height: 1.1;
-  font-size: clamp(1.5rem, 2.4vw + .3rem, 2.25rem);
-}
 
-/* Optional: card/pill treatment for the tagline (toggle class in HTML) */
-header.hero .hero__tagline.hero__tagline--card{
-  background: #fff;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
-  border-radius: 12px;
-  padding: .6rem .9rem;
-}
-
-/* Align H1 top with the top of the card in the split */
-header.hero .hero-split{ align-items: start; }
-header.hero h1{ margin-top: 0; }                 /* remove any top gap */
-header.hero .hero__card{ margin-top: 0; }        /* ensure card sits flush */
-/* Tagline scales from the logo height; stays in the same vertical band */
-header.hero .hero-intro{
-  display:grid;                 /* precise alignment */
-  grid-template-columns: auto 1fr;  /* logo | tagline */
-  align-items:center;
-  column-gap:1rem;
-}
-
-/* Set logo heights via vars so text can key off them */
+/* Logo size variables (single source of truth) */
 :root{
   --soc-logo-h-desktop: 120px;
   --soc-logo-h-mobile: 80px;
@@ -401,6 +374,7 @@ header.hero .hero-brand__img{ height: var(--soc-logo-h-desktop); }
 @media (max-width:640px){
   header.hero .hero-brand__img{ height: var(--soc-logo-h-mobile); }
 }
+
 /* Lead tagline aligned to top of logo and sized from logo height */
 header.hero .hero__tagline.hero__tagline--lead{
   --soc-logo-h: var(--soc-logo-h-desktop);
@@ -408,19 +382,24 @@ header.hero .hero__tagline.hero__tagline--lead{
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: .02em;
-  line-height: 1.1;
-  font-size: clamp(1.5rem, calc(var(--soc-logo-h) / 2.0), 3.5rem); /* bigger */
+  line-height: 1.08;
+  font-size: clamp(1.9rem, calc(var(--soc-logo-h) / 1.6), 4rem);
   text-wrap: balance;
   max-inline-size: 48ch;
-  align-self: start;   /* top aligns with logo */
+  align-self: start;        /* top aligns with logo */
+  margin-top: -0.2rem;      /* fine-tune upward nudge */
 }
 
 /* Mobile sizing */
 @media (max-width:640px){
   header.hero .hero__tagline.hero__tagline--lead{
     --soc-logo-h: var(--soc-logo-h-mobile);
-    font-size: clamp(1.2rem, calc(var(--soc-logo-h) / 2.0), 2.5rem);
-    align-self: start;
+    font-size: clamp(1.4rem, calc(var(--soc-logo-h) / 1.6), 2.8rem);
+    margin-top: -0.15rem;
   }
 }
 
+/* Align H1 top with the top of the card in the split */
+header.hero .hero-split{ align-items: start; }
+header.hero h1{ margin-top: 0; }
+header.hero .hero__card{ margin-top: 0; }
