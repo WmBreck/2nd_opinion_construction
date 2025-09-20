@@ -288,3 +288,20 @@ label.full-width{ grid-column:1 / -1; }
   .modal__content{ padding:2rem 1.5rem; }
   .otp__actions{ flex-direction:column; }
 }
+/* Local two-column split for hero body */
+.hero-split{
+  display:block;
+  margin:0 0 1.25rem 0;
+}
+.hero-split__left{ max-width:56ch; }
+.hero-split__right .hero__card{ margin:0; }
+
+/* Desktop: become a two-column grid; stacked on mobile */
+@media (min-width: 900px){
+  .hero-split{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 420px;
+    column-gap:40px;
+    align-items:start;
+  }
+}
