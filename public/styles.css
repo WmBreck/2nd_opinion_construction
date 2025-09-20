@@ -385,7 +385,7 @@ header.hero .hero__tagline.hero__tagline--lead{
   text-transform: uppercase;
   letter-spacing: .01em;
   line-height: 1;                          /* tight box */
-  font-size: clamp(1.6rem, calc(var(--soc-logo-h) / 2), 3.5rem); /* scales with logo */
+  font-size: clamp(1.6rem, calc(var(--soc-logo-h) / 2.4), 3.5rem); /* scales with logo */
   max-inline-size: 46ch;                   /* encourages 2-line wrap */
   align-self: start;                       /* top-align with logo */
   margin-top: 0;                           /* kill upward nudge */
