@@ -280,3 +280,27 @@ body.page-submit main {
   padding: 2rem 1.25rem !important; 
   box-sizing: border-box;
 }
+
+/* === Header logo (2nd Opinion Construction) ====================== */
+.site-header {
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.site-header .header-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.brand { display: inline-flex; align-items: center; text-decoration: none; }
+.brand-logo {
+  height: 56px;
+  width: auto;
+  display: block;
+}
+@media (max-width: 640px) {
+  .brand-logo { height: 40px; }
+}
+/* ================================================================ */
