@@ -305,3 +305,58 @@ label.full-width{ grid-column:1 / -1; }
     align-items:start;
   }
 }
+/* === SOC hero: lock in final layout + mobile fallbacks ================== */
+
+/* Container sizing for hero children */
+header.hero .container.hero__content > *{
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Keep intro row tight on mobile */
+header.hero .hero-intro{
+  gap: .75rem;
+}
+
+/* Two-column split only for the H1/para vs card */
+.hero-split{
+  display:block;
+  margin: 0 0 1.25rem 0;
+}
+.hero-split__left{ max-width:56ch; }
+.hero-split__right .hero__card{ margin:0; }
+
+/* Desktop: become a grid */
+@media (min-width: 900px){
+  .hero-split{
+    display:grid;
+    grid-template-columns: minmax(0,1fr) 420px;
+    column-gap: 40px;
+    align-items: start;
+  }
+}
+
+/* Ensure NO old grid leaks apply to the whole hero */
+header.hero .hero__content{
+  display: block !important;
+  grid: unset !important;
+  grid-template-columns: unset !important;
+  grid-template-areas: unset !important;
+}
+
+/* Paragraph readability */
+header.hero .hero__description{
+  max-width:56ch;
+  font-size: 1.075rem;
+  line-height: 1.6;
+}
+
+/* Card and banner spacing harmony */
+header.hero .hero__card{ margin: .25rem 0 1.25rem 0; }
+header.hero .hero-banner{ margin: 0 0 1.25rem 0; }
+
+/* Buttons wrap nicely on small screens */
+@media (max-width: 640px){
+  header.hero .hero__actions{ flex-direction: column; align-items: stretch; }
+}
