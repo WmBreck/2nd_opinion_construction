@@ -387,7 +387,7 @@ header.hero .hero__tagline.hero__tagline--lead{
   text-wrap: balance;
   max-inline-size: 46ch;                   /* encourages 2-line wrap */
   align-self: start;                       /* top-align to logo */
-  margin-top: -0.5 rem;                    /* nudge up to match hat */
+  margin-top: -0.0 rem;                    /* nudge up to match hat */
 }
 
 @media (max-width:640px){
