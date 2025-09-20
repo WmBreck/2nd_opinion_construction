@@ -17,7 +17,7 @@
     <div class="formcard" id="lead-card">
       <h1>Upload your bid for a confidential review</h1>
 
-      <form id="lead-form">
+      <form id="lead-form" novalidate>
         <div class="grid">
           <label>
             Full name
@@ -53,7 +53,7 @@
 
         <label>
           Notes (optional)
-          <textarea name="notes" maxlength="1000" rows="4" placeholder="Anything we should know?"></textarea>
+          <textarea name="notes" maxlength="1000" rows="5" placeholder="Anything we should know?"></textarea>
         </label>
 
         <fieldset class="fileset">
@@ -71,14 +71,19 @@
           <span id="status" class="status"></span>
         </div>
       </form>
-
-      <div id="done" class="done hidden">
-        <h2>Thanks — we’ll review within 1 business day.</h2>
-        <p>If additional plans are needed we’ll reach out.</p>
-        <a class="btn btn-ghost" href="/">Back to home</a>
-      </div>
     </div>
   </main>
+
+<!-- Success modal (hidden until submission completes) -->
+<div id="thanks-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="thanks-title">
+  <div class="modal__panel">
+    <h2 id="thanks-title">Thanks — we’ll review within 1 business day.</h2>
+    <p>If additional plans are needed we’ll reach out.</p>
+    <div class="modal__actions">
+      <a class="btn btn-ghost modal__close" href="/" id="thanks-close">Back to home</a>
+    </div>
+  </div>
+</div>
 
   <footer class="footer">
     <p>We keep your info private and only use it for this review. We do not sell or share your information.</p>

@@ -9,8 +9,26 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const statusEl = document.getElementById("status");
   const submitBtn = document.getElementById("submitBtn");
-  const done = document.getElementById("done");
   const filesInput = document.getElementById("files");
+
+  // Modal elements
+  const thanksModal = document.getElementById("thanks-modal");
+  const thanksClose = document.getElementById("thanks-close");
+
+  function openThanks(){
+    thanksModal.classList.add("is-open");
+    thanksClose.focus();
+  }
+
+  function closeThanks(){
+    thanksModal.classList.remove("is-open");
+  }
+
+  thanksModal?.addEventListener("click", (e) => {
+    if (e.target === thanksModal) closeThanks();
+  });
+
+  thanksClose?.addEventListener("click", () => closeThanks());
 
   async function uploadFiles(leadId) {
     const files = Array.from(filesInput.files || []);
@@ -67,9 +85,10 @@ window.addEventListener("DOMContentLoaded", () => {
       });
       if (!res.ok) throw new Error("notify_new_lead failed: " + (await res.text()));
 
-      document.getElementById("lead-card").querySelector("form").classList.add("hidden");
-      done.classList.remove("hidden");
+      // Success: clear form and open modal
+      leadForm.reset();
       statusEl.textContent = "";
+      openThanks();
     } catch (err) {
       console.error(err);
       statusEl.textContent = "Sorry—something went wrong. Please try again or call (864) 660-9913.";
