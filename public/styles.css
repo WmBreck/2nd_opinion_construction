@@ -377,27 +377,30 @@ header.hero .hero-brand__img{ height: var(--soc-logo-h-desktop); }
 }
 
 /* === SOC: single source of truth for lead tagline ===================== */
+/* Lead tagline: box locked to logo height, scalable, no extra margins */
 header.hero .hero__tagline.hero__tagline--lead{
   --soc-logo-h: var(--soc-logo-h-desktop);
   color: var(--brand-primary);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: .01em;
-  line-height: 1;                                 /* tight box */
-  font-size: clamp(1.55rem, calc(var(--soc-logo-h) / 2.3), 6rem);
-  text-wrap: balance;
-  max-inline-size: 46ch;                          /* keeps it to ~2 lines */
-  align-self: start;                              /* top-align to logo */
-  margin-top: 0;                                  /* valid value (no stray space) */
+  line-height: 1;                          /* tight box */
+  font-size: clamp(1.6rem, calc(var(--soc-logo-h) / 1.7), 5rem); /* scales with logo */
+  max-inline-size: 46ch;                   /* encourages 2-line wrap */
+  align-self: start;                       /* top-align with logo */
+  margin-top: 0;                           /* kill upward nudge */
+  margin-bottom: 0;                        /* kill default bottom margin */
+  padding: 0;                              /* no accidental padding */
 }
 
-/* Mobile sizing (only one block) */
+/* Mobile sizing */
 @media (max-width:640px){
   header.hero .hero__tagline.hero__tagline--lead{
     --soc-logo-h: var(--soc-logo-h-mobile);
-    font-size: clamp(1.2rem, calc(var(--soc-logo-h) / 2.2), 2.2rem);
+    font-size: clamp(1.2rem, calc(var(--soc-logo-h) / 1.8), 2.6rem);
     line-height: 1;
     margin-top: 0;
+    margin-bottom: 0;
   }
 }
 
