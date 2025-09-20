@@ -1,0 +1,44 @@
+name: nightly-backup
+on:
+  schedule:
+    - cron: "0 4 * * *"
+  workflow_dispatch:
+
+jobs:
+  backup:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create tag name
+        id: t
+        run: echo "TAG=backup-$(date -u +%Y%m%d-%H%M)-UTC" >> $GITHUB_OUTPUT
+
+      - name: Create tag
+        run: |
+          git tag -a "${{ steps.t.outputs.TAG }}" -m "nightly backup"
+          git push origin "${{ steps.t.outputs.TAG }}"
+
+      - name: Archive repo
+        run: |
+          git archive --format=zip --output "repo-${{ steps.t.outputs.TAG }}.zip" HEAD
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.t.outputs.TAG }}
+          name: ${{ steps.t.outputs.TAG }}
+          files: repo-${{ steps.t.outputs.TAG }}.zip
+
+      - name: Cleanup old backups
+        uses: dev-drprasad/delete-older-releases@v0.3.4
+        with:
+          keep_latest: 14
+          delete_tags: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
