@@ -424,3 +424,18 @@ label.full-width {
     height: 80px;  /* mobile */
   }
 }
+
+/* HERO INTRO FLEX */
+.hero-intro {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 600px; /* constrain width so tagline wraps */
+}
+
+.hero-intro .hero__tagline {
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 1.2;
+  flex: 1; /* tagline takes remaining space */
+}
