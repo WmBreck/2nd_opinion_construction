@@ -227,11 +227,74 @@ input:focus,select:focus,textarea:focus{
 /* keep the old .hidden utility (used elsewhere) */
 .hidden{ display:none }
 
+/* --- Submit page layout --- */
+body.page-submit .section{
+  padding: 28px 20px;         /* outer breathing room */
+}
 
-/* === Submit page layout tweaks === */
-body.page-submit main {
-  max-width: 800px;     /* keep form from stretching too wide */
-  margin: 0 auto;       /* center horizontally */
-  padding: 2rem 1.5rem; /* add top/bottom and side padding */
+body.page-submit main{
+  max-width: 840px;           /* overall width cap */
+  margin: 0 auto;             /* center */
+  padding: 0 16px;            /* side padding inside the cap */
   box-sizing: border-box;
+}
+
+/* Make the card obviously inset and padded */
+body.page-submit .formcard{
+  max-width: 760px;           /* slightly narrower than main */
+  margin: 24px auto;
+  padding: 24px 22px;
+  border-radius: 18px;
+  border: 1px solid #eadfce;
+  background: #fff;
+}
+
+/* One field per row with good spacing */
+body.page-submit .grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+body.page-submit form label{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+}
+
+body.page-submit input,
+body.page-submit select,
+body.page-submit textarea{
+  width: 100%;
+  font-size: 18px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid #d8d8d8;
+  background: #fff;
+  outline: none;
+}
+
+body.page-submit textarea{ min-height: 120px; }
+
+body.page-submit input:focus,
+body.page-submit select:focus,
+body.page-submit textarea:focus{
+  border-color: var(--ring);
+  box-shadow: 0 0 0 4px rgba(46,107,71,.16);
+}
+
+body.page-submit .fileset{
+  border: 1px dashed #cfcfcf;
+  border-radius: 14px;
+  padding: 14px;
+  background: #fffdfa;
+  margin: 6px 0 10px;
+}
+
+body.page-submit .actions{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
 }
