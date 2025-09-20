@@ -36,3 +36,6 @@ Thumbs.db
 # Env files
 .env
 .env.*
+# Design sources
+*.psdb
+hat in front icon.png
