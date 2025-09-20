@@ -425,17 +425,87 @@ label.full-width {
   }
 }
 
-/* HERO INTRO FLEX */
-.hero-intro {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  max-width: 600px; /* constrain width so tagline wraps */
-}
-
 .hero-intro .hero__tagline {
   font-size: 1.8rem;
   font-weight: 600;
   line-height: 1.2;
   flex: 1; /* tagline takes remaining space */
+}
+
+:root{
+  --brand-primary:#2563eb;        /* blue */
+  --brand-primary-600:#1d4ed8;
+  --brand-primary-700:#1e40af;
+  --brand-accent:#f59e0b;         /* hard-hat amber (optional accent) */
+  --text-strong:#1f2937;          /* charcoal */
+  --text-body:#374151;
+  --surface:#f3f4f6;              /* light gray background */
+  --surface-hero:#eef2f7;         /* very light blue-gray for hero */
+  --border:#e5e7eb;
+  --shadow:0 10px 20px rgba(0,0,0,.07), 0 2px 6px rgba(0,0,0,.05);
+}
+
+/* Hero background: move off green to light gray */
+.hero{
+  background: var(--surface-hero);
+}
+
+/* Tagline next to logo */
+.hero-intro .hero__tagline{
+  color: var(--text-strong);
+}
+
+/* Primary button -> blue */
+.button.button--primary{
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color:#fff;
+}
+.button.button--primary:hover{
+  background: var(--brand-primary-600);
+  border-color: var(--brand-primary-600);
+}
+.button.button--ghost{
+  color: var(--brand-primary-700);
+  border-color: var(--brand-primary-700);
+}
+.button.button--ghost:hover{
+  color:#fff;
+  background: var(--brand-primary-700);
+  border-color: var(--brand-primary-700);
+}
+
+/* Links */
+a{ color: var(--brand-primary); }
+a:hover{ color: var(--brand-primary-600); }
+
+/* Card + surfaces */
+.hero__card{
+  box-shadow: var(--shadow);
+  border:1px solid var(--border);
+  background:#fff;
+}
+
+/* Banner styles */
+.hero-banner{
+  margin: 0 0 1rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.hero-banner img{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+/* Keep logo + tagline alignment row */
+.hero-intro{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  max-width: 720px; /* lets tagline wrap to ~two lines on desktop */
+}
+@media (max-width: 768px){
+  .hero-intro{ max-width: 100%; }
 }
