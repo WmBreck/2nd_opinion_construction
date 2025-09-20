@@ -57,7 +57,7 @@
       <button id="cta-button" class="button button--primary">
         Upload your bid for a confidential review
       </button>
-      <a href="tel:18646609913" class="button button--ghost">Call (864) 660-9913</a>
+     <a id="call-link" href="tel:+18646609913" class="button button--ghost">Call (864) 660-9913</a>
       <p class="hero__privacy">Your info is never shared with third parties.</p>
     </div>
   </div>
@@ -233,6 +233,19 @@
       el.addEventListener('click', closeModal);
     });
   })();
-</script>
+  </script>
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const callLink = document.getElementById("call-link");
+    if (callLink) {
+      callLink.addEventListener("click", (e) => {
+        if (!/Mobi|Android/i.test(navigator.userAgent)) {
+          e.preventDefault();
+          alert("Please call (864) 660-9913 from your phone.");
+        }
+      });
+    }
+  });
+  </script>
 </body>
 </html>
