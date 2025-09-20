@@ -140,17 +140,28 @@ a:focus, .btn:focus { outline: none; box-shadow: 0 0 0 3px rgba(46,107,71,.2) }
 /* === Form UX upgrades === */
 .formcard h1 { margin-bottom: 12px; }
 
+/* Constrain the submit form card and add side padding */
+.formcard{
+  background:#fff;
+  border:1px solid #eadfce;
+  border-radius: var(--radius-lg);
+  max-width: 720px;     /* centered, not full width */
+  margin: 24px auto;    /* center horizontally */
+  padding: 24px 20px;   /* side padding for breathing room */
+}
+
+/* Ensure one field per line with good spacing (if not already) */
 .grid{
   display:grid;
+  grid-template-columns: 1fr; /* single column */
   gap:16px;
-  grid-template-columns: 1fr;   /* single column everywhere */
 }
 
 form label{
   display:flex;
   flex-direction:column;
   gap:8px;
-  margin:0;                      /* tighten between fields; grid handles spacing */
+  margin:0;
 }
 
 input, select, textarea{
@@ -169,7 +180,6 @@ input:focus,select:focus,textarea:focus{
   box-shadow:0 0 0 4px rgba(46,107,71,.16);
 }
 
-/* file picker area */
 .fileset{
   border:1px dashed #cfcfcf;
   border-radius:14px;
@@ -178,16 +188,8 @@ input:focus,select:focus,textarea:focus{
   background:#fffdfa;
 }
 
-/* actions row */
-.actions{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin-top:8px;
-}
-
-/* status text */
-.status{ color:#666; font-size:14px }
+.actions{ display:flex; align-items:center; gap:12px; margin-top:8px; }
+.status{ color:#666; font-size:14px; }
 
 /* === Success modal (hidden by default) === */
 .modal{

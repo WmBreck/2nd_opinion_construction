@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Upload Your Bid — Second Opinion Construction</title>
-  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/styles.css?v=6" />
   <script defer src="https://unpkg.com/@supabase/supabase-js@2"></script>
   <script defer src="/js/app.js"></script>
 </head>
@@ -14,63 +14,66 @@
   </header>
 
   <main class="section">
-    <div class="formcard" id="lead-card">
-      <h1>Upload your bid for a confidential review</h1>
+    <div class="form-container">
+      <div class="formcard" id="lead-card">
+        <h1>Upload your bid for a confidential review</h1>
 
-      <form id="lead-form" novalidate>
-        <div class="grid">
-          <label>
-            Full name
-            <input name="name" required autocomplete="name" />
-          </label>
-          <label>
-            Email
-            <input name="email" type="email" required autocomplete="email" />
-          </label>
-          <label>
-            Phone
-            <input name="phone" type="tel" required autocomplete="tel" />
-          </label>
-          <label>
-            City
-            <input name="city" required />
-          </label>
-          <label>
-            ZIP
-            <input name="zip" required pattern="\\d{5}" />
-          </label>
-          <label>
-            Why a second opinion?
-            <select name="reason" required>
-              <option value="">Select…</option>
-              <option>Price feels high</option>
-              <option>Scope unclear</option>
-              <option>Timeline concern</option>
-              <option>Other</option>
-            </select>
-          </label>
-        </div>
+        <form id="lead-form" novalidate>
+          <div class="grid">
+            <label>
+              Full name
+              <input name="name" required autocomplete="name" />
+            </label>
+            <label>
+              Email
+              <input name="email" type="email" required autocomplete="email" />
+            </label>
+            <label>
+              Phone
+              <input name="phone" type="tel" required autocomplete="tel" />
+            </label>
+            <label>
+              City
+              <input name="city" required />
+            </label>
+            <label>
+              ZIP
+              <input name="zip" required pattern="\\d{5}" />
+            </label>
+            <label>
+              Why a second opinion?
+              <select name="reason" required>
+                <option value="">Select…</option>
+                <option>Price feels high</option>
+                <option>Scope unclear</option>
+                <option>Timeline concern</option>
+                <option>Other</option>
+                <option>Beyond my budget for this project</option>
+              </select>
+            </label>
+          </div>
 
-        <label>
-          Notes (optional)
-          <textarea name="notes" maxlength="1000" rows="5" placeholder="Anything we should know?"></textarea>
-        </label>
+          <label>
+            Notes (optional)
+            <textarea name="notes" maxlength="1000" rows="5" placeholder="Anything we should know?"></textarea>
+          </label>
 
-        <fieldset class="fileset">
-          <legend>Files (PDF, DOCX, JPG/PNG) — up to 5 files, 50MB each</legend>
-          <input id="files" name="files" type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" multiple />
-        </fieldset>
+          <fieldset class="fileset">
+            <legend>Files (PDF, DOCX, JPG/PNG) — up to 5 files, 50MB each</legend>
+            <input id="files" name="files" type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" multiple />
+          </fieldset>
 
-        <label class="consent">
-          <input type="checkbox" name="consent" required />
-          I agree to a confidential review and to be contacted by phone or email.
-        </label>
+          <label class="consent">
+            <input type="checkbox" name="consent" required />
+            I agree to a confidential review and to be contacted by phone or email.
+          </label>
 
-        <div class="actions">
-          <button class="btn btn-primary" type="submit" id="submitBtn">Submit</button>
-          <span id="status" class="status"></span>
-        </div>
-      </form>
+          <div class="actions">
+            <button class="btn btn-primary" type="submit" id="submitBtn">Submit</button>
+            <span id="status" class="status"></span>
+          </div>
+        </form>
+      </div>
     </div>
   </main>
 
