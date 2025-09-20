@@ -219,5 +219,20 @@
     // reserved for future scroll behavior; present so future patches are idempotent
   })();
   </script>
+  <script>
+  (function () {
+    var btn = document.getElementById('cta-button');
+    var modal = document.getElementById('intake-modal');
+    if (!btn || !modal) return;
+
+    function openModal(e){ e && e.preventDefault(); modal.classList.add('active'); modal.removeAttribute('aria-hidden'); }
+    function closeModal(){ modal.classList.remove('active'); modal.setAttribute('aria-hidden','true'); }
+
+    btn.addEventListener('click', openModal);
+    modal.querySelectorAll('[data-close], .modal__overlay').forEach(function(el){
+      el.addEventListener('click', closeModal);
+    });
+  })();
+</script>
 </body>
 </html>
