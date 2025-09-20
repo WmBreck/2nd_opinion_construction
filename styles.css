@@ -273,3 +273,10 @@ body.page-submit textarea:focus {
   border-color: var(--ring);
   box-shadow: 0 0 0 4px rgba(46,107,71,.16);
 }
+/* Force padding & width on /submit */
+body.page-submit main { 
+  max-width: 840px !important; 
+  margin: 0 auto !important; 
+  padding: 2rem 1.25rem !important; 
+  box-sizing: border-box;
+}
