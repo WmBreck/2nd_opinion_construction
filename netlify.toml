@@ -1,6 +1,11 @@
 [build]
-  command = "echo no-build"
-  publish = "public"
+  publish = "."
+  command = ""
+
+[[redirects]]
+  from = "/submit"
+  to = "/submit.html"
+  status = 200
 
 [functions]
-  directory = "netlify/functions"
+  node_bundler = "esbuild"
