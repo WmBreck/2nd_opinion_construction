@@ -382,20 +382,21 @@ header.hero .hero__tagline.hero__tagline--lead{
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: .02em;
-  line-height: 1.08;
-  font-size: clamp(1.9rem, calc(var(--soc-logo-h) / 1.6), 4rem);
+  line-height: 1;          /* tighter vertical box */
+  margin-top: 0;           /* no extra offset */
+  font-size: clamp(1.7rem, calc(var(--soc-logo-h) / 1.8), 3.2rem);
   text-wrap: balance;
   max-inline-size: 48ch;
-  align-self: start;        /* top aligns with logo */
-  margin-top: -0.2rem;      /* fine-tune upward nudge */
+  align-self: start;       /* top aligns with logo */
 }
 
 /* Mobile sizing */
 @media (max-width:640px){
   header.hero .hero__tagline.hero__tagline--lead{
     --soc-logo-h: var(--soc-logo-h-mobile);
-    font-size: clamp(1.4rem, calc(var(--soc-logo-h) / 1.6), 2.8rem);
-    margin-top: -0.15rem;
+    font-size: clamp(1.3rem, calc(var(--soc-logo-h) / 1.8), 2.4rem);
+    line-height: 1;
+    margin-top: 0;
   }
 }
 
