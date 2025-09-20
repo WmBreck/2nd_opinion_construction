@@ -53,13 +53,23 @@
       <img src="measurementsbanner.png" alt="Blueprint and pencil measurements" />
     </figure>
 
-    <div class="hero__actions">
-      <button id="cta-button" class="button button--primary">
-        Upload your bid for a confidential review
-      </button>
-     <a id="call-link" href="tel:+18646609913" class="button button--ghost">Call (864) 660-9913</a>
-      <p class="hero__privacy">Your info is never shared with third parties.</p>
-    </div>
+<div class="hero__actions">
+  <button id="cta-button" class="button button--primary">
+    Upload your bid for a confidential review
+  </button>
+  <a id="call-link" href="tel:+18646609913" class="button button--ghost">Call (864) 660-9913</a>
+  <p class="hero__privacy">You’ll upload your bid after a quick one-time verification.</p>
+</div>
+
+<div id="call-fallback" class="modal" role="dialog" aria-hidden="true">
+  <div class="modal__overlay" data-close></div>
+  <div class="modal__content">
+    <button class="modal__close" data-close aria-label="Close">×</button>
+    <h2>Call us</h2>
+    <p>Please dial <strong>(864) 660-9913</strong> from your phone.</p>
+    <a href="tel:+18646609913" class="button button--primary">Call now</a>
+  </div>
+</div>
   </div>
 </header>
 
@@ -143,17 +153,18 @@
                 <option value="150k+">150k+</option>
               </select>
             </label>
-            <label>
-              What's prompting the review?
-              <select name="reason" required>
-                <option value="">Select</option>
-                <option value="Price feels high">Price feels high</option>
-                <option value="Scope unclear">Scope unclear</option>
-                <option value="Timeline concern">Timeline concern</option>
-                <option value="Other">Other</option>
-              </select>
-              <span class="field-error" data-error-for="reason"></span>
-            </label>
+           <label>
+            What are your concerns?
+            <select name="reason" required>
+              <option value="">Select</option>
+              <option value="Beyond my budget">Beyond my budget</option>
+              <option value="Price feels high">Price feels high</option>
+              <option value="Scope unclear">Scope unclear</option>
+              <option value="Timeline concern">Timeline concern</option>
+              <option value="Other">Other</option>
+            </select>
+            <span class="field-error" data-error-for="reason"></span>
+          </label>
             <label class="full-width">
               Extra context (optional)
               <textarea name="notes" rows="3" placeholder="Share anything you'd like us to know before we review."></textarea>
@@ -161,7 +172,7 @@
           </div>
           <label class="consent">
             <input type="checkbox" name="consent" required>
-            <span>I agree to a confidential review and to be contacted by phone or email.</span>
+            <span>I agree to a free confidential review and to be contacted by phone or email.</span>
           </label>
           <span class="field-error" data-error-for="consent"></span>
           <button type="submit" class="button button--primary" data-submit>Send me a verification code</button>
@@ -242,6 +253,42 @@
         if (!/Mobi|Android/i.test(navigator.userAgent)) {
           e.preventDefault();
           alert("Please call (864) 660-9913 from your phone.");
+        }
+      });
+    }
+  });
+  </script>
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const ctaBtn = document.getElementById("cta-button");
+    const intake = document.getElementById("intake-modal");
+    const callLink = document.getElementById("call-link");
+    const callModal = document.getElementById("call-fallback");
+
+    function openModal(el){ if(el){ el.classList.add("active"); el.setAttribute("aria-hidden","false"); } }
+    function closeModal(el){ if(el){ el.classList.remove("active"); el.setAttribute("aria-hidden","true"); } }
+
+    if (ctaBtn && intake) {
+      ctaBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        openModal(intake);
+      });
+      intake.querySelectorAll("[data-close], .modal__overlay").forEach((x)=> {
+        x.addEventListener("click", () => closeModal(intake));
+      });
+    }
+
+    if (callLink) {
+      const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+      callLink.addEventListener("click", (e) => {
+        if (!isMobile) {
+          e.preventDefault();
+          if (callModal) {
+            openModal(callModal);
+            callModal.querySelectorAll("[data-close], .modal__overlay").forEach((x)=> {
+              x.addEventListener("click", () => closeModal(callModal));
+            });
+          }
         }
       });
     }
