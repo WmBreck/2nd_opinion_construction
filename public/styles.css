@@ -67,6 +67,7 @@ a.button{ text-decoration:none; }
   display:block;
   height:120px;
   width:auto;
+  margin-top:0.5rem;
 }
 @media (max-width:640px){
   .hero-brand img.hero-brand__img{ height:80px; }
