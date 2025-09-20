@@ -375,19 +375,27 @@ header.hero .hero-brand__img{ height: var(--soc-logo-h-desktop); }
   header.hero .hero-brand__img{ height: var(--soc-logo-h-mobile); }
 }
 
-/* Lead tagline aligned to top of logo and sized from logo height */
+/* Lead tagline: smaller, top-aligned with logo */
 header.hero .hero__tagline.hero__tagline--lead{
   --soc-logo-h: var(--soc-logo-h-desktop);
   color: var(--brand-primary);
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: .02em;
-  line-height: 1;          /* tighter vertical box */
-  margin-top: 0;           /* no extra offset */
-  font-size: clamp(1.7rem, calc(var(--soc-logo-h) / 1.8), 3.2rem);
+  letter-spacing: .01em;
+  line-height: 1;                          /* tight box */
+  font-size: clamp(1.55rem, calc(var(--soc-logo-h) / 2.0), 3rem); /* smaller */
   text-wrap: balance;
-  max-inline-size: 48ch;
-  align-self: start;       /* top aligns with logo */
+  max-inline-size: 46ch;                   /* encourages 2-line wrap */
+  align-self: start;                       /* top-align to logo */
+  margin-top: -0.18rem;                    /* nudge up to match hat */
+}
+
+@media (max-width:640px){
+  header.hero .hero__tagline.hero__tagline--lead{
+    --soc-logo-h: var(--soc-logo-h-mobile);
+    font-size: clamp(1.2rem, calc(var(--soc-logo-h) / 2.0), 2.2rem);
+    margin-top: -0.12rem;
+  }
 }
 
 /* Mobile sizing */
