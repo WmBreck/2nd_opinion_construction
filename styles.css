@@ -9,7 +9,7 @@
   --accent:#2d6a49;        /* deep construction green */
   --accent-2:#174e33;
   --panel: #fff6ec;        /* warm panel */
-  --hero-img: url("https://images.unsplash.com/photo-1603575219043-7c7e2f1b3aaf?ixlib=rb-4.0.3&auto=format&fit=crop&w=2400&q=80"); /* yellow tape on lumber */
+  --hero-img: url("https://images.unsplash.com/photo-1603575219043-7c7e2f1b3aaf?ixlib=rb-4.0.3&auto=format&fit=crop&w=2400&q=80");
   --ring:  #cdd9d1;
 
   --radius-lg: 20px;
@@ -87,8 +87,7 @@ body.page{
   height: 360px;
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   box-shadow: var(--shadow-lg);
-  background-color: var(--paper); /* graceful fallback */
-  /* Put a translucent gradient ON TOP of the image (first layer), but keep it transparent enough to see the photo */
+  background-color: var(--paper);
   background-image:
     linear-gradient(
       to bottom,
@@ -98,7 +97,7 @@ body.page{
     ),
     var(--hero-img);
   background-size: cover;
-  background-position: center 75%; /* bias downward to show tape numbers */
+  background-position: center 75%;
   background-repeat: no-repeat;
 }
 
