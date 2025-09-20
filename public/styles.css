@@ -407,3 +407,20 @@ label.full-width {
     flex-direction: column;
   }
 }
+.hero-brand {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.hero-brand img.hero-brand__img {
+  display: block;
+  height: 120px;   /* desktop */
+  width: auto;
+}
+
+@media (max-width: 640px) {
+  .hero-brand img.hero-brand__img {
+    height: 80px;  /* mobile */
+  }
+}
