@@ -315,7 +315,7 @@ header.hero .container.hero__content > *{
   margin-right: auto;
 }
 
-/* Keep/* Keep intro row tight on mobile */
+/* Keep intro row tight on mobile */
 header.hero .hero-intro{
   display: grid;
   grid-template-columns: auto 1fr; /* logo | tagline */
@@ -376,30 +376,60 @@ header.hero .hero-brand__img{ height: var(--soc-logo-h-desktop); }
   header.hero .hero-brand__img{ height: var(--soc-logo-h-mobile); }
 }
 
-/* Lead tagline: scalable with logo, roomy max */
+/* Tagline: fills logo height, aligned top+bottom */
+header.hero .hero-intro {
+  display: grid;
+  grid-template-columns: auto 1fr;  /* logo | tagline */
+  align-items: stretch;             /* both take full row height */
+  column-gap: 1rem;
+}
+
 header.hero .hero__tagline.hero__tagline--lead {
   --soc-logo-h: var(--soc-logo-h-desktop);
+  display: flex;                     
+  align-items: center;               /* center text inside the logo band */
+  height: var(--soc-logo-h);         
   color: var(--brand-primary);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: .01em;
-  line-height: 1.05;
-  font-size: clamp(1.6rem, calc(var(--soc-logo-h) / 2.0), 5rem); /* safe band */
+  line-height: 1.1;
+  font-size: clamp(1.6rem, calc(var(--soc-logo-h) / 2.2), 3.7rem);
   text-wrap: balance;
   max-inline-size: 46ch;
-  align-self: start;        /* top-align to logo */
-  margin-top: 0;            /* adjust this to fine-tune vertical */
+  margin: 0;
 }
 
-@media (max-width:640px) {
+/* Mobile tagline */
+@media (max-width: 640px) {
   header.hero .hero__tagline.hero__tagline--lead {
     --soc-logo-h: var(--soc-logo-h-mobile);
-    font-size: clamp(1.2rem, calc(var(--soc-logo-h) / 2.0), 3rem); /* smaller safe band */
-    line-height: 1.1;
+    height: var(--soc-logo-h);
+    font-size: clamp(1.3rem, calc(var(--soc-logo-h) / 2.4), 2.6rem);
   }
 }
 
-/* Align H1 top with the top of the card in the split */
-header.hero .hero-split{ align-items: start; }
-header.hero h1{ margin-top: 0; }
-header.hero .hero__card{ margin-top: 0; }
+/* Headline (Measure twice...) top-aligns with card */
+header.hero .hero-split {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 420px;
+  column-gap: 40px;
+  align-items: start;   /* align both children at the top */
+}
+
+header.hero h1 {
+  margin-top: 0;        /* remove gap above headline */
+}
+
+header.hero .hero__card {
+  margin-top: 0;        /* card also starts at grid top */
+}
+
+/* Enlarged CTA description under the H1 */
+header.hero .hero__description.hero__description--cta{
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--brand-primary);
+  margin-top: 0.5rem;
+  line-height: 1.3;
+}
