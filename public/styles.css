@@ -384,7 +384,7 @@ header.hero .hero__tagline.hero__tagline--lead{
   text-transform: uppercase;
   letter-spacing: .01em;
   line-height: 1;                          /* tight box */
-  font-size: clamp(1.55rem, calc(var(--soc-logo-h) / 1.8), 3.5rem); /* smaller */
+  font-size: clamp(1.55rem, calc(var(--soc-logo-h) / 1.8), 4rem); /* smaller */
   text-wrap: balance;
   max-inline-size: 46ch;                   /* encourages 2-line wrap */
   align-self: start;                       /* top-align to logo */
@@ -394,7 +394,7 @@ header.hero .hero__tagline.hero__tagline--lead{
 @media (max-width:640px){
   header.hero .hero__tagline.hero__tagline--lead{
     --soc-logo-h: var(--soc-logo-h-mobile);
-    font-size: clamp(1.2rem, calc(var(--soc-logo-h) / 2.0), 2.2rem);
+    font-size: clamp(1.2rem, calc(var(--soc-logo-h) / 2.0), 4rem);
     margin-top: -0.12rem;
   }
 }
