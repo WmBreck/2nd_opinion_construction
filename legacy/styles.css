@@ -1,0 +1,342 @@
+/* =========
+   Base
+   ========= */
+:root{
+  /* palette tuned for warm, trustworthy feel */
+  --paper: #f6f1ec;        /* warm background */
+  --ink:   #101010;
+  --muted: #444;
+  --accent:#2d6a49;        /* deep construction green */
+  --accent-2:#174e33;
+  --panel: #fff6ec;        /* warm panel */
+  --hero-img: url("https://images.unsplash.com/photo-1603575219043-7c7e2f1b3aaf?ixlib=rb-4.0.3&auto=format&fit=crop&w=2400&q=80");
+  --ring:  #cdd9d1;
+
+  --radius-lg: 20px;
+  --radius-sm: 12px;
+
+  --shadow-sm: 0 2px 10px rgba(0,0,0,.06);
+  --shadow-lg: 0 18px 40px rgba(0,0,0,.18);
+}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body.page{
+  font:16px/1.5 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  color:var(--ink);
+  background:
+    linear-gradient(180deg, #fbf9f7 0%, #f7f2ee 40%, #fff 100%);
+}
+
+/* layout helpers */
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+
+/* =========
+   Hero
+   ========= */
+.hero{
+  position:relative;
+  padding:48px 0 0;
+  background:
+    radial-gradient(1200px 500px at 50% -200px, rgba(255,255,255,.9), rgba(255,255,255,0) 70%),
+    linear-gradient(180deg, #f7f2ee 0%, #fbf9f7 60%, #fff 100%);
+}
+
+.hero .hero-copy{
+  max-width:900px;
+  padding-bottom:8px;
+}
+
+.display{
+  font-weight:800;
+  letter-spacing:-0.02em;
+  line-height:1.05;
+  margin:0 0 10px;
+  font-size: clamp(38px, 6vw, 68px);
+}
+
+.tagline{
+  color:var(--accent);
+  font-size: clamp(18px, 2.4vw, 28px);
+  font-weight: 650;
+  margin:2px 0 18px;
+}
+
+.cta-row{display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  display:inline-block;
+  padding:12px 18px;
+  border-radius: 999px;
+  font-weight:700;
+  text-decoration:none;
+  border:1px solid transparent;
+  box-shadow: var(--shadow-sm);
+  transition: transform .05s ease, box-shadow .2s ease, filter .2s ease;
+}
+.btn:active{transform: translateY(1px)}
+.btn-primary{background:var(--accent); color:#fff}
+.btn-primary:hover{filter:brightness(.96); box-shadow:0 8px 22px rgba(45,106,73,.28)}
+.btn-ghost{background:#fff; color:#222; border-color:#e2e2e2}
+.btn-ghost:hover{background:#f6f6f6}
+
+.privacy{color:#666; font-size:14px; margin:8px 2px 0}
+
+/* photo band under hero text */
+.photo-band {
+  margin: 28px 0 0;
+  height: 380px;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  box-shadow: var(--shadow-lg);
+  background:
+    /* translucent overlay for warmth + readability */
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.00) 0%,
+      rgba(247,242,238,0.22) 62%,
+      rgba(247,242,238,0.36) 100%
+    ),
+    url("/img/measurementslogo.jpg");
+  background-size: cover;
+  background-position: center 70%; /* adjust to show the most important part */
+  background-repeat: no-repeat;
+  background-color: var(--paper);
+}
+
+
+/* =========
+   Value panel
+   ========= */
+.section{padding:34px 0 36px}
+.value-card{
+  background: var(--panel);
+  border:1px solid #eddcc8;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding:24px 20px;
+}
+.value-card h2{
+  font-size: clamp(22px, 2.2vw, 32px);
+  margin:0 0 6px;
+  letter-spacing:-.01em;
+}
+.value-card .lede{max-width:68ch; margin:0 0 14px; color:#222}
+.value-card .cta-row{align-items:center}
+.value-card .tel{margin:0}
+
+/* =========
+   Footer
+   ========= */
+.footer{
+  border-top:1px solid #eadfce;
+  background:#fff;
+  padding:24px 0;
+  color:#444;
+}
+
+/* focus states */
+a:focus, .btn:focus { outline: none; box-shadow: 0 0 0 3px rgba(46,107,71,.2) }
+
+
+/* === Form UX upgrades === */
+.formcard h1 { margin-bottom: 12px; }
+
+/* Constrain the submit form card and add side padding */
+.formcard{
+  background:#fff;
+  border:1px solid #eadfce;
+  border-radius: var(--radius-lg);
+  max-width: 720px;     /* centered, not full width */
+  margin: 24px auto;    /* center horizontally */
+  padding: 24px 20px;   /* side padding for breathing room */
+}
+
+/* Ensure one field per line with good spacing (if not already) */
+.grid{
+  display:grid;
+  grid-template-columns: 1fr; /* single column */
+  gap:16px;
+}
+
+form label{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin:0;
+}
+
+input, select, textarea{
+  width:100%;
+  font-size:18px;
+  padding:14px 16px;
+  border-radius:14px;
+  border:1px solid #d8d8d8;
+  background:#fff;
+  outline:none;
+}
+textarea{ min-height:120px; }
+
+input:focus,select:focus,textarea:focus{
+  border-color:var(--ring);
+  box-shadow:0 0 0 4px rgba(46,107,71,.16);
+}
+
+.fileset{
+  border:1px dashed #cfcfcf;
+  border-radius:14px;
+  padding:14px;
+  margin:4px 0 8px;
+  background:#fffdfa;
+}
+
+.actions{ display:flex; align-items:center; gap:12px; margin-top:8px; }
+.status{ color:#666; font-size:14px; }
+
+/* === Success modal (hidden by default) === */
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,.35);
+  padding:20px;
+  z-index:50;
+}
+
+.modal.is-open{ display:flex; }
+
+.modal__panel{
+  width:min(680px, 92vw);
+  background:#fff;
+  border-radius:20px;
+  box-shadow: var(--shadow-lg);
+  padding:24px 22px;
+  border:1px solid #eadfce;
+  text-align:left;
+}
+
+.modal__panel h2{
+  margin:0 0 6px;
+  font-size:28px;
+  letter-spacing:-.01em;
+}
+.modal__panel p{ margin:6px 0 16px; color:#222 }
+.modal__actions{ display:flex; gap:10px; }
+.modal__close{ margin-left:auto }
+
+/* keep the old .hidden utility (used elsewhere) */
+.hidden{ display:none }
+
+/* === Submit page simple layout fix === */
+body.page-submit main {
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;  /* side padding */
+  box-sizing: border-box;
+}
+
+body.page-submit .formcard {
+  max-width: 760px;
+  margin: 24px auto;
+  padding: 24px 20px;
+  border-radius: 18px;
+  border: 1px solid #eadfce;
+  background: #fff;
+}
+
+/* Ensure one field per line */
+body.page-submit .grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+body.page-submit form label { display:flex; flex-direction:column; gap:8px; margin:0; }
+
+body.page-submit input,
+body.page-submit select,
+body.page-submit textarea {
+  width:100%;
+  font-size:18px;
+  padding:14px 16px;
+  border-radius:14px;
+  border:1px solid #d8d8d8;
+  background:#fff;
+  outline:none;
+}
+
+body.page-submit textarea { min-height:120px; }
+
+body.page-submit input:focus,
+body.page-submit select:focus,
+body.page-submit textarea:focus {
+  border-color: var(--ring);
+  box-shadow: 0 0 0 4px rgba(46,107,71,.16);
+}
+/* Force padding & width on /submit */
+body.page-submit main { 
+  max-width: 840px !important; 
+  margin: 0 auto !important; 
+  padding: 2rem 1.25rem !important; 
+  box-sizing: border-box;
+}
+
+/* === Brand + Hero Transition ===================================== */
+.site-header {
+  position: relative;
+  z-index: 30;
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.brand-logo--small {
+  height: 44px;
+  width: auto;
+  display: block;
+}
+
+/* Hero overlay brand: large on entry */
+.hero {
+  position: relative;
+}
+.hero .hero__inner {
+  position: relative;
+}
+.hero-brand {
+  position: relative; /* falls back if no positioning context */
+  display: flex;
+  justify-content: flex-start; /* left of headline on desktop */
+  align-items: center;
+  margin-bottom: 16px;
+}
+.hero-brand__img {
+  display: block;
+  height: 122px; /* desktop initial size */
+  width: auto;
+  image-rendering: auto;
+  /* Anti-halo guard: if the PNG has a faint gray matte, these help it blend */
+  background: transparent; /* if true transparency exists */
+  outline: 1px solid rgba(0,0,0,0); /* avoid subpixel fringing */
+}
+
+/* When scrolled, hide big hero logo (headline remains) */
+body.is-scrolled .hero-brand {
+  display: none;
+}
+
+/* Mobile sizing */
+@media (max-width: 640px) {
+  .brand-logo--small { height: 40px; }
+  .hero-brand__img { height: 86px; }
+}
+
+/* Users who prefer reduced motion: no visual jump (we simply show/hide) */
+@media (prefers-reduced-motion: reduce) {
+  .hero-brand, .brand-logo--small { transition: none !important; }
+}
+
+/* Optional: if your hero background is off-white, ensure no banding behind the logo */
+.hero, .hero .hero__inner {
+  background: transparent;
+}
+
+/* === End brand/hero transition =================================== */
