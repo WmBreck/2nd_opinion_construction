@@ -281,26 +281,62 @@ body.page-submit main {
   box-sizing: border-box;
 }
 
-/* === Header logo (2nd Opinion Construction) ====================== */
+/* === Brand + Hero Transition ===================================== */
 .site-header {
+  position: relative;
+  z-index: 30;
   background: #ffffff;
   border-bottom: 1px solid rgba(0,0,0,0.06);
 }
-.site-header .header-wrap {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 12px 16px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-.brand { display: inline-flex; align-items: center; text-decoration: none; }
-.brand-logo {
-  height: 56px;
+.brand-logo--small {
+  height: 44px;
   width: auto;
   display: block;
 }
-@media (max-width: 640px) {
-  .brand-logo { height: 40px; }
+
+/* Hero overlay brand: large on entry */
+.hero {
+  position: relative;
 }
-/* ================================================================ */
+.hero .hero__inner {
+  position: relative;
+}
+.hero-brand {
+  position: relative; /* falls back if no positioning context */
+  display: flex;
+  justify-content: flex-start; /* left of headline on desktop */
+  align-items: center;
+  margin-bottom: 16px;
+}
+.hero-brand__img {
+  display: block;
+  height: 122px; /* desktop initial size */
+  width: auto;
+  image-rendering: auto;
+  /* Anti-halo guard: if the PNG has a faint gray matte, these help it blend */
+  background: transparent; /* if true transparency exists */
+  outline: 1px solid rgba(0,0,0,0); /* avoid subpixel fringing */
+}
+
+/* When scrolled, hide big hero logo (headline remains) */
+body.is-scrolled .hero-brand {
+  display: none;
+}
+
+/* Mobile sizing */
+@media (max-width: 640px) {
+  .brand-logo--small { height: 40px; }
+  .hero-brand__img { height: 86px; }
+}
+
+/* Users who prefer reduced motion: no visual jump (we simply show/hide) */
+@media (prefers-reduced-motion: reduce) {
+  .hero-brand, .brand-logo--small { transition: none !important; }
+}
+
+/* Optional: if your hero background is off-white, ensure no banding behind the logo */
+.hero, .hero .hero__inner {
+  background: transparent;
+}
+
+/* === End brand/hero transition =================================== */
