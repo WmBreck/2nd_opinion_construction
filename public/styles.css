@@ -384,3 +384,53 @@ header.hero .hero__tagline.hero__tagline--card{
 header.hero .hero-split{ align-items: start; }
 header.hero h1{ margin-top: 0; }                 /* remove any top gap */
 header.hero .hero__card{ margin-top: 0; }        /* ensure card sits flush */
+/* Tagline scales from the logo height; stays in the same vertical band */
+header.hero .hero-intro{
+  display:grid;                 /* precise alignment */
+  grid-template-columns: auto 1fr;  /* logo | tagline */
+  align-items:center;
+  column-gap:1rem;
+}
+
+/* Set logo heights via vars so text can key off them */
+:root{
+  --soc-logo-h-desktop: 120px;
+  --soc-logo-h-mobile: 80px;
+}
+header.hero .hero-brand__img{ height: var(--soc-logo-h-desktop); }
+@media (max-width:640px){
+  header.hero .hero-brand__img{ height: var(--soc-logo-h-mobile); }
+}
+
+/* Lead tagline sizes from the logo height, and uses brand blue */
+header.hero .hero__tagline.hero__tagline--lead{
+  --soc-logo-h: var(--soc-logo-h-desktop);
+  color: var(--brand-primary);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  line-height: 1.1;
+  /* font-size roughly = logo height / 2.6 (≈ two lines with 1.1 line-height) */
+  font-size: clamp(1.25rem, calc(var(--soc-logo-h) / 2.6), 3rem);
+  text-wrap: balance;           /* nicer two-line wrap */
+  max-inline-size: 48ch;        /* avoids running too wide on huge screens */
+  align-self: center;           /* stays vertically centered vs logo */
+}
+
+/* Mobile: use mobile logo height for sizing */
+@media (max-width:640px){
+  header.hero .hero__tagline.hero__tagline--lead{
+    --soc-logo-h: var(--soc-logo-h-mobile);
+    font-size: clamp(1.1rem, calc(var(--soc-logo-h) / 2.6), 2rem);
+  }
+}
+
+/* Optional: if you want the tagline to perfectly share the logo's band,
+   remove the centering and stretch it to the logo's height. Uncomment to try:
+
+header.hero .hero__tagline.hero__tagline--lead{
+  max-block-size: var(--soc-logo-h);
+  display:flex;
+  align-items:center;   // centers text within that band
+}
+*/
