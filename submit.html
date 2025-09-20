@@ -86,5 +86,16 @@
   <footer class="footer">
     <p>We keep your info private and only use it for this review. We do not sell or share your information.</p>
   </footer>
+  <script>
+document.addEventListener('DOMContentLoaded', function () {
+  var form = document.getElementById('lead-form');
+  var modal = document.getElementById('thanks-modal');
+  if (!form || !modal) return;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    modal.classList.add('is-open');
+  });
+});
+</script>
 </body>
 </html>
