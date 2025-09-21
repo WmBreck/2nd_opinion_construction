@@ -9,6 +9,9 @@
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   // ---- Elements ----
+  const ctaBtn       = document.getElementById("cta-button");
+  const ctaFileInput = document.getElementById("cta-file-input");
+  const ctaInline    = document.getElementById("cta-inline-link");
   const intakeModal = document.getElementById("intake-modal");
   const stepContact = intakeModal?.querySelector('[data-step="contact"]');
   const stepOtp     = intakeModal?.querySelector('[data-step="otp"]');
@@ -263,7 +266,57 @@
       setStatus(otpForm, "Could not resend code. Try again later.", true);
     }
   });
+  // ---- CTA behavior: file-pick first (desktop), then open modal ----
+  function openIntakeWithOptionalFiles(triggeredByPicker = false) {
+    // Open the intake modal (contact step)
+    if (intakeModal) {
+      intakeModal.classList.add("active");
+      intakeModal.setAttribute("aria-hidden", "false");
+    }
+    // If we just added files via picker, show them in lists now
+    refreshAllLists();
+  }
 
+  async function handleCtaClick(e) {
+    e.preventDefault();
+    // Prefer opening a native file picker first so we carry files forward
+    if (ctaFileInput) {
+      // Clear previous selection so change fires even if same files chosen
+      ctaFileInput.value = "";
+      ctaFileInput.click();
+
+      // If the user picks files, stash them and then open modal
+      const onChange = () => {
+        const files = Array.from(ctaFileInput.files || []);
+        if (files.length) {
+          const { ok, errors } = validateAndAddFiles(files);
+          if (!ok) {
+            // Attach errors to contact form status if present; else console
+            setStatus(contactForm, (errors || []).join(" "), true);
+          } else {
+            setStatus(contactForm, "");
+          }
+        }
+        ctaFileInput.removeEventListener("change", onChange);
+        openIntakeWithOptionalFiles(true);
+      };
+      ctaFileInput.addEventListener("change", onChange, { once: true });
+
+      // Fallback: if user cancels the picker, open the modal after a short tick
+      setTimeout(() => {
+        if (!ctaFileInput.files || ctaFileInput.files.length === 0) {
+          openIntakeWithOptionalFiles(false);
+        }
+      }, 300);
+      return;
+    }
+
+    // Absolute fallback: just open the modal
+    openIntakeWithOptionalFiles(false);
+  }
+
+  if (ctaBtn)    ctaBtn.addEventListener("click", handleCtaClick);
+  if (ctaInline) ctaInline.addEventListener("click", handleCtaClick);
   // ---- Upload step UI: add more files via button/drag-drop ----
   fileSelect?.addEventListener("click", () => fileInput?.click());
   fileInput?.addEventListener("change", (e) => {
