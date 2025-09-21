@@ -57,20 +57,36 @@
   <button id="cta-button" class="button button--primary">
     Upload your bid for a confidential review
   </button>
-  <a id="call-link" href="tel:+18646609913" class="button button--ghost">Call (864) 660-9913</a>
-  <p class="hero__privacy">You’ll upload your bid after a quick one-time verification.</p>
+
+  <!-- Desktop button (no tel: href) -->
+  <button id="call-link" class="button button--ghost only-desktop" data-tel="+18646609913">
+    Call (864) 660-9913
+  </button>
+
+  <!-- Mobile anchor (uses tel: and bypasses JS) -->
+  <a id="call-link-mobile" href="tel:+18646609913" class="button button--ghost only-mobile">
+    Call (864) 660-9913
+  </a>
+
+  <p class="hero__privacy">Your info is never shared with third parties.</p>
 </div>
 
-<div id="call-fallback" class="modal" role="dialog" aria-hidden="true">
+<!-- Clean desktop modal -->
+<div id="call-fallback" class="modal" role="dialog" aria-hidden="true" aria-labelledby="call_modal_title">
   <div class="modal__overlay" data-close></div>
-  <div class="modal__content">
-    <button class="modal__close" data-close aria-label="Close">×</button>
-    <h2>Call us</h2>
-    <p>Please dial <strong>(864) 660-9913</strong> from your phone.</p>
-    <a href="tel:+18646609913" class="button button--primary">Call now</a>
+  <div class="modal__content" role="document">
+    <button class="modal__close" data-close aria-label="Close call dialog">×</button>
+    <h2 id="call_modal_title">Give us a quick call</h2>
+    <p>Please call <strong>(864) 660-9913</strong> from your phone.</p>
+    <div class="otp__actions">
+      <button type="button" id="copy-call-number" class="button button--primary">Copy number</button>
+      <button type="button" class="button button--ghost" data-close>Close</button>
+    </div>
+    <p id="copy-toast" style="display:none; margin-top:.75rem; color:var(--brand-primary); font-weight:600;">
+      Number copied — paste into your dialer.
+    </p>
   </div>
 </div>
-  </div>
 </header>
 
   <main>
@@ -294,5 +310,64 @@
     }
   });
   </script>
+  <script>
+  (function(){
+    // Open the intake modal when the primary CTA is clicked
+    const cta = document.getElementById('cta-button');
+    if (cta) {
+      cta.addEventListener('click', () => {
+        const modal = document.getElementById('intake-modal');
+        if (modal) {
+          modal.classList.add('active');
+          modal.setAttribute('aria-hidden', 'false');
+        }
+      });
+    }
+
+    // Desktop "Call" button -> pretty modal (no system popup)
+    const callBtn   = document.getElementById('call-link');       // desktop-only button
+    const callModal = document.getElementById('call-fallback');   // the modal container
+    const copyBtn   = document.getElementById('copy-call-number');
+    const toast     = document.getElementById('copy-toast');
+
+    function openCallModal(){
+      if (!callModal) return;
+      callModal.classList.add('active');
+      callModal.setAttribute('aria-hidden','false');
+    }
+    function closeCallModal(){
+      if (!callModal) return;
+      callModal.classList.remove('active');
+      callModal.setAttribute('aria-hidden','true');
+    }
+
+    if (callBtn) {
+      callBtn.addEventListener('click', (e) => {
+        e.preventDefault(); // don't trigger tel: on desktop
+        openCallModal();
+      });
+    }
+
+    // Close modal on overlay or close button
+    document.querySelectorAll('#call-fallback [data-close]').forEach(el => {
+      el.addEventListener('click', closeCallModal);
+    });
+
+    // Copy the phone number
+    if (copyBtn) {
+      copyBtn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText('+18646609913');
+          if (toast) {
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 1600);
+          }
+        } catch (err) {
+          window.prompt('Copy number:', '(864) 660-9913');
+        }
+      });
+    }
+  })();
+</script>
 </body>
 </html>

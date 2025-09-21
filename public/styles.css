@@ -302,3 +302,17 @@ label.full-width{ grid-column:1 / -1; }
 #call-fallback .modal__close { position:absolute; top:.75rem; right:.75rem; border:none; background:transparent; font-size:1.4rem; cursor:pointer; line-height:1; }
 #call-fallback h2 { margin:.25rem 0 1rem 0; font-size:1.3rem; color:var(--text-strong); }
 #call-fallback p { margin:0 0 1.25rem 0; color:var(--text-body); }
+/* Show desktop vs mobile versions of the Call control */
+.only-desktop { display: inline-flex; }
+.only-mobile  { display: none; }
+@media (max-width: 820px){
+  .only-desktop { display: none; }
+  .only-mobile  { display: inline-flex; }
+}
+/* Show desktop vs mobile versions of the Call control */
+.only-desktop { display: inline-flex; }
+.only-mobile  { display: none; }
+@media (max-width: 820px){
+  .only-desktop { display: none; }
+  .only-mobile  { display: inline-flex; }
+}
