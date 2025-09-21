@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>2nd Opinion Construction</title>
-  <link rel="stylesheet" href="styles.css?v=hero12">
+  <link rel="stylesheet" href="styles.css?v=hero15">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <style id="soc-hero-styles">
@@ -29,147 +29,149 @@
     </div>
 
     <!-- TWO-COLUMN SPLIT (ONLY FOR H1 + DESCRIPTION vs CARD) -->
-<div class="hero-split">
-  <div class="hero-split__left">
-   <h1>Measure twice! Wisdom that quality builders live by.</h1>
-<p class="hero__description hero__description--cta">
-  Get a free second-opinion review before you sign!
-</p>
-  </div>
+    <div class="hero-split">
+      <div class="hero-split__left">
+        <h1>Measure twice! Wisdom that quality builders live by.</h1>
+        <p class="hero__description hero__description--cta">
+          Get a free second-opinion review before you sign!
+        </p>
+      </div>
 
-  <div class="hero-split__right">
-    <div class="hero__card">
-      <h2>What you get</h2>
-      <ul>
-        <li>Line-by-line review of your bid</li>
-        <li>Realistic allowances and timelines</li>
-        <li>Upfront advice on scope and change orders</li>
-      </ul>
+      <div class="hero-split__right">
+        <div class="hero__card">
+          <h2>What you get</h2>
+          <ul>
+            <li>Line-by-line review of your bid</li>
+            <li>Realistic allowances and timelines</li>
+            <li>Upfront advice on scope and change orders</li>
+          </ul>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
     <figure class="hero-banner">
       <img src="measurementsbanner.png" alt="Blueprint and pencil measurements" />
     </figure>
 
-<div class="hero__actions">
-  <button id="cta-button" class="button button--primary">
-    Upload your bid for a confidential review
-  </button>
+    <div class="hero__actions">
+      <button id="cta-button" class="button button--primary">
+        Upload your bid for a confidential review
+      </button>
 
-  <!-- Desktop button (no tel: href) -->
-  <button id="call-link" class="button button--ghost only-desktop" data-tel="+18646609913">
-    Call (864) 660-9913
-  </button>
+      <!-- Desktop button (pretty modal) -->
+      <button id="call-link" class="button button--ghost only-desktop" data-tel="+18646609913">
+        Call (864) 660-9913
+      </button>
 
-  <!-- Mobile anchor (uses tel: and bypasses JS) -->
-  <a id="call-link-mobile" href="tel:+18646609913" class="button button--ghost only-mobile">
-    Call (864) 660-9913
-  </a>
+      <!-- Mobile anchor (launches dialer) -->
+      <a id="call-link-mobile" href="tel:+18646609913" class="button button--ghost only-mobile">
+        Call (864) 660-9913
+      </a>
 
-  <p class="hero__privacy">Your info is never shared with third parties.</p>
-</div>
-
-<!-- Clean desktop modal -->
-<div id="call-fallback" class="modal" role="dialog" aria-hidden="true" aria-labelledby="call_modal_title">
-  <div class="modal__overlay" data-close></div>
-  <div class="modal__content" role="document">
-    <button class="modal__close" data-close aria-label="Close call dialog">×</button>
-    <h2 id="call_modal_title">Give us a quick call</h2>
-    <p>Please call <strong>(864) 660-9913</strong> from your phone.</p>
-    <div class="otp__actions">
-      <button type="button" id="copy-call-number" class="button button--primary">Copy number</button>
-      <button type="button" class="button button--ghost" data-close>Close</button>
+      <p class="hero__privacy">Your info is never shared with third parties.</p>
     </div>
-    <p id="copy-toast" style="display:none; margin-top:.75rem; color:var(--brand-primary); font-weight:600;">
-      Number copied — paste into your dialer.
-    </p>
+
+    <!-- Clean desktop modal -->
+    <div id="call-fallback" class="modal" role="dialog" aria-hidden="true" aria-labelledby="call_modal_title">
+      <div class="modal__overlay" data-close></div>
+      <div class="modal__content" role="document">
+        <button class="modal__close" data-close aria-label="Close call dialog">×</button>
+        <h2 id="call_modal_title">Give us a quick call</h2>
+        <p>Please call <strong>(864) 660-9913</strong> from your phone.</p>
+        <div class="otp__actions">
+          <button type="button" id="copy-call-number" class="button button--primary">Copy number</button>
+          <button type="button" class="button button--ghost" data-close>Close</button>
+        </div>
+        <p id="copy-toast" style="display:none; margin-top:.75rem; color:var(--brand-primary); font-weight:600;">
+          Number copied — paste into your dialer.
+        </p>
+      </div>
+    </div>
   </div>
-</div>
 </header>
 
-  <main>
-    <section class="section section--two-column">
-      <div class="container">
-        <div class="feature">
-          <h3>Local expertise, zero pressure</h3>
-          <p>We’re builders in the Upstate. Use us as a gut check before you commit, or when you need a neutral third party to sanity-check pricing and scope.</p>
-        </div>
-        <div class="feature">
-          <h3>Secure document handling</h3>
-          <p>Your drawings, specs, and bids stay private. We use Supabase with private storage, expiring links, and verification before anyone at our firm opens your files.</p>
-        </div>
-        <div class="feature">
-          <h3>Quick turnaround</h3>
-          <p>Expect an email or phone call within one business day. If we need more detail, we’ll reach out directly.</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
+<main>
+  <section class="section section--two-column">
     <div class="container">
-      <p>A service of Upstate Contractors LLC — Greenville, SC • <a href="mailto:upcountrycontractors@gmail.com">upcountrycontractors@gmail.com</a></p>
+      <div class="feature">
+        <h3>Local expertise, zero pressure</h3>
+        <p>We’re builders in the Upstate. Use us as a gut check before you commit, or when you need a neutral third party to sanity-check pricing and scope.</p>
+      </div>
+      <div class="feature">
+        <h3>Secure document handling</h3>
+        <p>Your drawings, specs, and bids stay private. We use Supabase with private storage, expiring links, and verification before anyone at our firm opens your files.</p>
+      </div>
+      <div class="feature">
+        <h3>Quick turnaround</h3>
+        <p>Expect an email or phone call within one business day. If we need more detail, we’ll reach out directly.</p>
+      </div>
     </div>
-  </footer>
+  </section>
+</main>
 
-  <div id="intake-modal" class="modal" role="dialog" aria-hidden="true" aria-labelledby="modal-title">
-    <div class="modal__overlay" data-close></div>
-    <div class="modal__content">
-      <button class="modal__close" data-close aria-label="Close intake form">×</button>
+<footer class="footer">
+  <div class="container">
+    <p>A service of Upstate Contractors LLC — Greenville, SC • <a href="mailto:upcountrycontractors@gmail.com">upcountrycontractors@gmail.com</a></p>
+  </div>
+</footer>
 
-      <div class="modal__step" data-step="contact">
-        <h2 id="modal-title">Tell us about your project</h2>
-        <p class="modal__intro">We’ll send a one-time code to verify you before collecting files.</p>
-        <form id="contact-form" novalidate>
-          <div class="form-grid">
-            <label>
-              Name
-              <input type="text" name="name" required autocomplete="name">
-              <span class="field-error" data-error-for="name"></span>
-            </label>
-            <label>
-              Email
-              <input type="email" name="email" required autocomplete="email">
-              <span class="field-error" data-error-for="email"></span>
-            </label>
-            <label>
-              Phone
-              <input type="tel" name="phone" required autocomplete="tel">
-              <span class="field-error" data-error-for="phone"></span>
-            </label>
-            <label>
-              City
-              <input type="text" name="city" autocomplete="address-level2">
-            </label>
-            <label>
-              ZIP
-              <input type="text" name="zip" autocomplete="postal-code">
-            </label>
-            <label>
-              Project type (optional)
-              <select name="project_type">
-                <option value="">Select</option>
-                <option value="kitchen">Kitchen</option>
-                <option value="bath">Bath</option>
-                <option value="addition">Addition</option>
-                <option value="exterior">Exterior</option>
-                <option value="whole-home">Whole-home</option>
-                <option value="other">Other</option>
-              </select>
-            </label>
-            <label>
-              Budget range (optional)
-              <select name="budget_range">
-                <option value="">Select</option>
-                <option value="<15k">&lt;15k</option>
-                <option value="15–50k">15–50k</option>
-                <option value="50–150k">50–150k</option>
-                <option value="150k+">150k+</option>
-              </select>
-            </label>
-           <label>
+<!-- Intake modal -->
+<div id="intake-modal" class="modal" role="dialog" aria-hidden="true" aria-labelledby="modal-title">
+  <div class="modal__overlay" data-close></div>
+  <div class="modal__content">
+    <button class="modal__close" data-close aria-label="Close intake form">×</button>
+
+    <div class="modal__step" data-step="contact">
+      <h2 id="modal-title">Tell us about your project</h2>
+      <p class="modal__intro">We’ll send a one-time code to verify you before collecting files.</p>
+      <form id="contact-form" novalidate>
+        <div class="form-grid">
+          <label>
+            Name
+            <input type="text" name="name" required autocomplete="name">
+            <span class="field-error" data-error-for="name"></span>
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" required autocomplete="email">
+            <span class="field-error" data-error-for="email"></span>
+          </label>
+          <label>
+            Phone
+            <input type="tel" name="phone" required autocomplete="tel">
+            <span class="field-error" data-error-for="phone"></span>
+          </label>
+          <label>
+            City
+            <input type="text" name="city" autocomplete="address-level2">
+          </label>
+          <label>
+            ZIP
+            <input type="text" name="zip" autocomplete="postal-code">
+          </label>
+          <label>
+            Project type (optional)
+            <select name="project_type">
+              <option value="">Select</option>
+              <option value="kitchen">Kitchen</option>
+              <option value="bath">Bath</option>
+              <option value="addition">Addition</option>
+              <option value="exterior">Exterior</option>
+              <option value="whole-home">Whole-home</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+          <label>
+            Budget range (optional)
+            <select name="budget_range">
+              <option value="">Select</option>
+              <option value="<15k">&lt;15k</option>
+              <option value="15–50k">15–50k</option>
+              <option value="50–150k">50–150k</option>
+              <option value="150k+">150k+</option>
+            </select>
+          </label>
+          <label>
             What are your concerns?
             <select name="reason" required>
               <option value="">Select</option>
@@ -181,179 +183,107 @@
             </select>
             <span class="field-error" data-error-for="reason"></span>
           </label>
-            <label class="full-width">
-              Extra context (optional)
-              <textarea name="notes" rows="3" placeholder="Share anything you'd like us to know before we review."></textarea>
-            </label>
-          </div>
-          <label class="consent">
-            <input type="checkbox" name="consent" required>
-            <span>I agree to a free confidential review and to be contacted by phone or email.</span>
+          <label class="full-width">
+            Extra context (optional)
+            <textarea name="notes" rows="3" placeholder="Share anything you'd like us to know before we review."></textarea>
           </label>
-          <span class="field-error" data-error-for="consent"></span>
-          <button type="submit" class="button button--primary" data-submit>Send me a verification code</button>
-          <p class="form-status" data-status></p>
-        </form>
-      </div>
+        </div>
+        <label class="consent">
+          <input type="checkbox" name="consent" required>
+          <span>I agree to a free confidential review and to be contacted by phone or email.</span>
+        </label>
+        <span class="field-error" data-error-for="consent"></span>
+        <button type="submit" class="button button--primary" data-submit>Send me a verification code</button>
+        <p class="form-status" data-status></p>
+      </form>
+    </div>
 
-      <div class="modal__step" data-step="otp" hidden>
-        <h2>Check your email</h2>
-        <p>We’ve sent a 6-digit code to <strong data-otp-email></strong>. Enter it below to continue.</p>
-        <form id="otp-form" novalidate>
-          <label class="otp">
-            Verification code
-            <input type="text" inputmode="numeric" name="otp" required maxlength="6" pattern="[0-9]{6}">
-            <span class="field-error" data-error-for="otp"></span>
-          </label>
-          <div class="otp__actions">
-            <button type="submit" class="button button--primary" data-submit>Verify</button>
-            <button type="button" class="button button--ghost" id="resend-otp">Resend code</button>
-          </div>
-          <p class="form-status" data-status></p>
-        </form>
-      </div>
+    <div class="modal__step" data-step="otp" hidden>
+      <h2>Check your email</h2>
+      <p>We’ve sent a 6-digit code to <strong data-otp-email></strong>. Enter it below to continue.</p>
+      <form id="otp-form" novalidate>
+        <label class="otp">
+          Verification code
+          <input type="text" inputmode="numeric" name="otp" required maxlength="6" pattern="[0-9]{6}">
+          <span class="field-error" data-error-for="otp"></span>
+        </label>
+        <div class="otp__actions">
+          <button type="submit" class="button button--primary" data-submit>Verify</button>
+          <button type="button" class="button button--ghost" id="resend-otp">Resend code</button>
+        </div>
+        <p class="form-status" data-status></p>
+      </form>
+    </div>
 
-      <div class="modal__step" data-step="upload" hidden>
-        <h2>Upload your bid</h2>
-        <p>Attach up to five files. We accept PDF, DOC, DOCX, JPG, and PNG up to 50&nbsp;MB each.</p>
-        <form id="upload-form" novalidate>
-          <label class="file-drop" id="file-drop">
-            <input type="file" id="file-input" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" hidden>
-            <span>Drag files here or <button type="button" class="link" id="file-select">browse your computer</button></span>
-          </label>
-          <ul class="upload-list" id="upload-list"></ul>
-          <p class="form-status" data-status></p>
-          <div class="upload__actions">
-            <button type="submit" class="button button--primary" data-submit>Upload and submit</button>
-            <button type="button" class="button button--ghost" data-close>Cancel</button>
-          </div>
-        </form>
-      </div>
+    <div class="modal__step" data-step="upload" hidden>
+      <h2>Upload your bid</h2>
+      <p>Attach up to five files. We accept PDF, DOC, DOCX, JPG, and PNG up to 50&nbsp;MB each.</p>
+      <form id="upload-form" novalidate>
+        <label class="file-drop" id="file-drop">
+          <input type="file" id="file-input" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" hidden>
+          <span>Drag files here or <button type="button" class="link" id="file-select">browse your computer</button></span>
+        </label>
+        <ul class="upload-list" id="upload-list"></ul>
+        <p class="form-status" data-status></p>
+        <div class="upload__actions">
+          <button type="submit" class="button button--primary" data-submit>Upload and submit</button>
+          <button type="button" class="button button--ghost" data-close>Cancel</button>
+        </div>
+      </form>
+    </div>
 
-      <div class="modal__step" data-step="success" hidden>
-        <h2>Thanks — we’re on it.</h2>
-        <p>We’ll review within one business day. If we need plans or details, we’ll reach out directly.</p>
-        <button class="button button--primary" data-close>Close</button>
-      </div>
+    <div class="modal__step" data-step="success" hidden>
+      <h2>Thanks — we’re on it.</h2>
+      <p>We’ll review within one business day. If we need plans or details, we’ll reach out directly.</p>
+      <button class="button button--primary" data-close>Close</button>
     </div>
   </div>
+</div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="env.js"></script>
-  <script src="app.js" defer></script>
-  <script id="soc-hero-script">
+  <script src="app.js?v=2" defer></script> <!-- note: cache-busted -->
+
+  <!-- Single, unified script (removes old alert-based handler) -->
+  <script>
   (function(){
-    // reserved for future scroll behavior; present so future patches are idempotent
-  })();
-  </script>
-  <script>
-  (function () {
-    var btn = document.getElementById('cta-button');
-    var modal = document.getElementById('intake-modal');
-    if (!btn || !modal) return;
+    // Primary CTA -> open intake modal
+    const cta = document.getElementById('cta-button');
+    const intake = document.getElementById('intake-modal');
 
-    function openModal(e){ e && e.preventDefault(); modal.classList.add('active'); modal.removeAttribute('aria-hidden'); }
-    function closeModal(){ modal.classList.remove('active'); modal.setAttribute('aria-hidden','true'); }
+    function openModal(el){ if(el){ el.classList.add('active'); el.setAttribute('aria-hidden','false'); } }
+    function closeModal(el){ if(el){ el.classList.remove('active'); el.setAttribute('aria-hidden','true'); } }
 
-    btn.addEventListener('click', openModal);
-    modal.querySelectorAll('[data-close], .modal__overlay').forEach(function(el){
-      el.addEventListener('click', closeModal);
-    });
-  })();
-  </script>
-  <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const callLink = document.getElementById("call-link");
-    if (callLink) {
-      callLink.addEventListener("click", (e) => {
-        if (!/Mobi|Android/i.test(navigator.userAgent)) {
-          e.preventDefault();
-          alert("Please call (864) 660-9913 from your phone.");
-        }
-      });
-    }
-  });
-  </script>
-  <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const ctaBtn = document.getElementById("cta-button");
-    const intake = document.getElementById("intake-modal");
-    const callLink = document.getElementById("call-link");
-    const callModal = document.getElementById("call-fallback");
-
-    function openModal(el){ if(el){ el.classList.add("active"); el.setAttribute("aria-hidden","false"); } }
-    function closeModal(el){ if(el){ el.classList.remove("active"); el.setAttribute("aria-hidden","true"); } }
-
-    if (ctaBtn && intake) {
-      ctaBtn.addEventListener("click", (e) => {
+    if (cta && intake) {
+      cta.addEventListener('click', (e) => {
         e.preventDefault();
         openModal(intake);
       });
-      intake.querySelectorAll("[data-close], .modal__overlay").forEach((x)=> {
-        x.addEventListener("click", () => closeModal(intake));
+      intake.querySelectorAll('[data-close], .modal__overlay').forEach((x)=> {
+        x.addEventListener('click', () => closeModal(intake));
       });
     }
 
-    if (callLink) {
-      const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
-      callLink.addEventListener("click", (e) => {
-        if (!isMobile) {
-          e.preventDefault();
-          if (callModal) {
-            openModal(callModal);
-            callModal.querySelectorAll("[data-close], .modal__overlay").forEach((x)=> {
-              x.addEventListener("click", () => closeModal(callModal));
-            });
-          }
-        }
-      });
-    }
-  });
-  </script>
-  <script>
-  (function(){
-    // Open the intake modal when the primary CTA is clicked
-    const cta = document.getElementById('cta-button');
-    if (cta) {
-      cta.addEventListener('click', () => {
-        const modal = document.getElementById('intake-modal');
-        if (modal) {
-          modal.classList.add('active');
-          modal.setAttribute('aria-hidden', 'false');
-        }
-      });
-    }
-
-    // Desktop "Call" button -> pretty modal (no system popup)
-    const callBtn   = document.getElementById('call-link');       // desktop-only button
-    const callModal = document.getElementById('call-fallback');   // the modal container
+    // Desktop Call -> pretty modal (no system popup)
+    const callBtn   = document.getElementById('call-link');      // desktop-only button
+    const callModal = document.getElementById('call-fallback');  // modal container
     const copyBtn   = document.getElementById('copy-call-number');
     const toast     = document.getElementById('copy-toast');
 
-    function openCallModal(){
-      if (!callModal) return;
-      callModal.classList.add('active');
-      callModal.setAttribute('aria-hidden','false');
-    }
-    function closeCallModal(){
-      if (!callModal) return;
-      callModal.classList.remove('active');
-      callModal.setAttribute('aria-hidden','true');
-    }
+    function openCall(){ openModal(callModal); }
+    function closeCall(){ closeModal(callModal); }
 
     if (callBtn) {
       callBtn.addEventListener('click', (e) => {
-        e.preventDefault(); // don't trigger tel: on desktop
-        openCallModal();
+        e.preventDefault();           // prevent any tel: behavior on desktop
+        openCall();
       });
     }
-
-    // Close modal on overlay or close button
-    document.querySelectorAll('#call-fallback [data-close]').forEach(el => {
-      el.addEventListener('click', closeCallModal);
-    });
-
-    // Copy the phone number
+    if (callModal) {
+      callModal.querySelectorAll('[data-close], .modal__overlay').forEach((x)=> {
+        x.addEventListener('click', closeCall);
+      });
+    }
     if (copyBtn) {
       copyBtn.addEventListener('click', async () => {
         try {
@@ -362,12 +292,14 @@
             toast.style.display = 'block';
             setTimeout(() => { toast.style.display = 'none'; }, 1600);
           }
-        } catch (err) {
+        } catch {
           window.prompt('Copy number:', '(864) 660-9913');
         }
       });
     }
   })();
-</script>
+  </script>
+</body>
+</html>
 </body>
 </html>
