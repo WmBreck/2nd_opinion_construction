@@ -70,6 +70,12 @@ a.button{ text-decoration:none; }
   color:var(--text-strong);
   flex:1 1 auto;
 }
+@media (max-width:640px){
+  .hero__tagline{
+    font-size:1.1rem; /* smaller on phones only */
+    line-height:1.2;
+  }
+}
 
 /* Lead tagline that fills the logo’s band (top & bottom align) */
 header.hero .hero__tagline.hero__tagline--lead{
