@@ -282,6 +282,7 @@ label.full-width{ grid-column:1 / -1; }
 }
 .file-drop.dragging{ border-style:solid; background:rgba(37,99,235,.12); }
 .upload-list{ list-style:none; margin:0 0 1rem; padding:0; }
+.file-hint { display:block; margin-top:.35rem; color:var(--muted); font-size:.9rem; }
 .upload-item{
   display:flex; justify-content:space-between; align-items:center; gap:1rem;
   padding:.75rem 1rem; border-radius:.75rem; background:rgba(0,0,0,.04); font-size:.95rem; margin-bottom:.5rem;
@@ -315,4 +316,11 @@ label.full-width{ grid-column:1 / -1; }
 @media (max-width: 820px){
   .only-desktop { display: none; }
   .only-mobile  { display: inline-flex; }
+}
+/* visibility helpers for call buttons */
+.only-mobile { display: none; }
+.only-desktop { display: inline-flex; }
+@media (max-width: 640px){
+  .only-mobile { display: inline-flex; }
+  .only-desktop { display: none; }
 }

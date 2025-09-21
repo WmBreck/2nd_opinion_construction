@@ -188,6 +188,13 @@
             <textarea name="notes" rows="3" placeholder="Share anything you'd like us to know before we review."></textarea>
           </label>
         </div>
+        <!-- Attach now (optional) — files will carry through after verification -->
+        <label class="full-width">
+          Attach your bid now (optional)
+          <input type="file" id="file-input-initial" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+          <small class="file-hint">Up to 5 files. PDF, DOC, DOCX, JPG, PNG. Max 50 MB each.</small>
+        </label>
+        <ul class="upload-list" id="upload-list-initial"></ul>
         <label class="consent">
           <input type="checkbox" name="consent" required>
           <span>I agree to a free confidential review and to be contacted by phone or email.</span>

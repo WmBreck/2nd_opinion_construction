@@ -21,7 +21,11 @@
 
   const otpEmailEl  = stepOtp?.querySelector("[data-otp-email]");
 
-  // File UI
+  // Initial attach (contact step)
+  const initialInput = document.getElementById("file-input-initial");
+  const initialList  = document.getElementById("upload-list-initial");
+
+  // Upload step UI
   const fileDrop    = document.getElementById("file-drop");
   const fileInput   = document.getElementById("file-input");
   const fileSelect  = document.getElementById("file-select");
@@ -29,10 +33,15 @@
 
   // ---- Local state ----
   const state = {
-    contact: null,        // { name, email, phone, city, zip, project_type, budget_range, reason, notes, consent }
+    contact: null,        // { name, email, phone, ... }
     pendingFiles: [],     // File[]
     userIdentity: null    // { email }
   };
+
+  // ---- Config ----
+  const MAX_FILES = 5;
+  const MAX_MB = 50;
+  const ALLOWED = [".pdf",".doc",".docx",".jpg",".jpeg",".png"];
 
   // ---- Helpers ----
   function showStep(stepEl) {
@@ -59,6 +68,74 @@
     formEl?.querySelectorAll(".field-error").forEach(el => el.textContent = "");
   }
 
+  function extOk(name){
+    const lower = name.toLowerCase();
+    return ALLOWED.some(x => lower.endsWith(x));
+  }
+  function sizeOk(file){
+    return file.size <= MAX_MB * 1024 * 1024;
+  }
+
+  function validateAndAddFiles(newFiles){
+    const errors = [];
+    const room = Math.max(0, MAX_FILES - state.pendingFiles.length);
+    const selected = Array.from(newFiles || []);
+    if (!selected.length) return { ok: true };
+
+    const add = selected.slice(0, room);
+    if (selected.length > room) {
+      errors.push(`Only ${MAX_FILES} files allowed (you already selected ${state.pendingFiles.length}).`);
+    }
+
+    const vetted = [];
+    for (const f of add) {
+      if (!extOk(f.name)) {
+        errors.push(`Unsupported type: ${f.name}`);
+        continue;
+      }
+      if (!sizeOk(f)) {
+        errors.push(`Too large (> ${MAX_MB} MB): ${f.name}`);
+        continue;
+      }
+      vetted.push(f);
+    }
+
+    state.pendingFiles.push(...vetted);
+    return { ok: errors.length === 0, errors };
+  }
+
+  function populateList(targetUl){
+    if (!targetUl) return;
+    targetUl.innerHTML = "";
+    state.pendingFiles.forEach((file, idx) => {
+      const li = document.createElement("li");
+      li.className = "upload-item";
+      li.dataset.index = String(idx);
+      li.innerHTML = `
+        <span>${file.name} • ${(file.size/1024/1024).toFixed(1)} MB</span>
+        <div class="upload-actions">
+          <button type="button" class="button button--sm" data-remove>Remove</button>
+        </div>
+      `;
+      targetUl.appendChild(li);
+    });
+  }
+
+  function refreshAllLists(){
+    populateList(initialList);
+    populateList(uploadList);
+  }
+
+  function filesFromDataTransfer(dt) {
+    const items = Array.from(dt.items || []);
+    const files = items
+      .filter(i => i.kind === "file")
+      .map(i => i.getAsFile())
+      .filter(Boolean);
+    return files;
+  }
+
+  // ---- Contact step validation + OTP send ----
   function validateContact(form) {
     clearFieldErrors(form);
     const formData = new FormData(form);
@@ -89,32 +166,6 @@
     };
   }
 
-  function populateUploadList() {
-    uploadList.innerHTML = "";
-    state.pendingFiles.forEach((file, idx) => {
-      const li = document.createElement("li");
-      li.className = "upload-item";
-      li.dataset.index = String(idx);
-      li.innerHTML = `
-        <span>${file.name} • ${(file.size/1024/1024).toFixed(1)} MB</span>
-        <div class="upload-actions">
-          <button type="button" class="button button--sm" data-remove>Remove</button>
-        </div>
-      `;
-      uploadList.appendChild(li);
-    });
-  }
-
-  function filesFromDataTransfer(dt) {
-    const items = Array.from(dt.items || []);
-    const files = items
-      .filter(i => i.kind === "file")
-      .map(i => i.getAsFile())
-      .filter(Boolean);
-    return files;
-  }
-
-  // ---- Contact step: send email OTP ----
   contactForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
     const contact = validateContact(contactForm);
@@ -125,7 +176,6 @@
 
     setStatus(contactForm, "Sending verification code...");
     try {
-      // Send OTP to email
       const { error } = await supabase.auth.signInWithOtp({
         email: contact.email,
         options: {
@@ -146,6 +196,26 @@
     }
   });
 
+  // ---- Initial attach on contact step ----
+  initialInput?.addEventListener("change", (e) => {
+    const files = Array.from(e.target.files || []);
+    const { ok, errors } = validateAndAddFiles(files);
+    refreshAllLists();
+    if (!ok) setStatus(contactForm, errors.join(" "), true);
+    else setStatus(contactForm, "");
+  });
+
+  initialList?.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-remove]");
+    if (!btn) return;
+    const li = btn.closest("li.upload-item");
+    const idx = Number(li?.dataset.index || "-1");
+    if (idx >= 0) {
+      state.pendingFiles.splice(idx, 1);
+      refreshAllLists();
+    }
+  });
+
   // ---- OTP step: verify 6-digit code ----
   otpForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -161,15 +231,16 @@
     }
 
     try {
-      const { data, error } = await supabase.auth.verifyOtp({
+      const { error } = await supabase.auth.verifyOtp({
         email: state.userIdentity?.email,
         token: otp,
         type: "email"
       });
       if (error) throw error;
-      // Authenticated
+
       setStatus(otpForm, "");
       showStep(stepUpload);
+      refreshAllLists(); // show any files already selected
     } catch (err) {
       console.error(err);
       setFieldError(otpForm, "otp", "Invalid or expired code");
@@ -177,7 +248,6 @@
     }
   });
 
-  // ---- OTP: resend ----
   document.getElementById("resend-otp")?.addEventListener("click", async () => {
     if (!state.userIdentity?.email) return;
     setStatus(otpForm, "Resending code...");
@@ -194,12 +264,14 @@
     }
   });
 
-  // ---- Upload step: local file selection + drag/drop ----
+  // ---- Upload step UI: add more files via button/drag-drop ----
   fileSelect?.addEventListener("click", () => fileInput?.click());
   fileInput?.addEventListener("change", (e) => {
     const files = Array.from(e.target.files || []);
-    state.pendingFiles.push(...files);
-    populateUploadList();
+    const { ok, errors } = validateAndAddFiles(files);
+    refreshAllLists();
+    if (!ok) setStatus(uploadForm, errors.join(" "), true);
+    else setStatus(uploadForm, "");
   });
 
   fileDrop?.addEventListener("dragover", (e) => {
@@ -211,8 +283,10 @@
     e.preventDefault();
     fileDrop.classList.remove("dragging");
     const files = filesFromDataTransfer(e.dataTransfer);
-    state.pendingFiles.push(...files);
-    populateUploadList();
+    const { ok, errors } = validateAndAddFiles(files);
+    refreshAllLists();
+    if (!ok) setStatus(uploadForm, errors.join(" "), true);
+    else setStatus(uploadForm, "");
   });
 
   uploadList?.addEventListener("click", (e) => {
@@ -222,37 +296,35 @@
     const idx = Number(li?.dataset.index || "-1");
     if (idx >= 0) {
       state.pendingFiles.splice(idx, 1);
-      populateUploadList();
+      refreshAllLists();
     }
   });
 
-  // ---- Upload submit: store files + contact record ----
+  // ---- Upload submit: store files + (optional) record ----
   uploadForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
     if (!state.userIdentity?.email) {
       setStatus(uploadForm, "Session expired. Please restart.", true);
       return;
     }
+    if (state.pendingFiles.length === 0) {
+      setStatus(uploadForm, "Please attach at least one file (or click Close to finish).", true);
+      return;
+    }
 
-    // Create a row in a table if you want (e.g., 'intakes'); here we'll just attach metadata to file names.
     setStatus(uploadForm, "Uploading files...");
-
     try {
-      // Ensure a 'bids' storage bucket exists in Supabase (public or with RLS as needed).
       const emailSlug = state.userIdentity.email.replace(/[^a-z0-9@._-]/gi, "_");
       const basePath = `bids/${emailSlug}/${Date.now()}`;
 
-      // Upload files (up to 5, enforced by UI text)
       for (let i = 0; i < state.pendingFiles.length; i++) {
         const file = state.pendingFiles[i];
         const path = `${basePath}/${file.name}`;
-        const { error } = await supabase.storage.from("bids").upload(path, file, {
-          upsert: false
-        });
+        const { error } = await supabase.storage.from("bids").upload(path, file, { upsert: false });
         if (error) throw error;
       }
 
-      // Optionally, store a simple intake record (requires a table + anon insert policy):
+      // Optionally insert a row (requires an `intakes` table with proper RLS)
       // await supabase.from("intakes").insert([{ ...state.contact, email: state.userIdentity.email, files_path: basePath }]);
 
       setStatus(uploadForm, "");
@@ -263,14 +335,12 @@
     }
   });
 
-  // Close success -> close modal
+  // Close success -> close modal & reset
   stepSuccess?.querySelector("[data-close]")?.addEventListener("click", () => {
-    if (intakeModal) {
-      intakeModal.classList.remove("active");
-      intakeModal.setAttribute("aria-hidden", "true");
-      // reset local state
-      state.pendingFiles = [];
-      populateUploadList();
-    }
+    if (!intakeModal) return;
+    intakeModal.classList.remove("active");
+    intakeModal.setAttribute("aria-hidden", "true");
+    state.pendingFiles = [];
+    refreshAllLists();
   });
 })();
